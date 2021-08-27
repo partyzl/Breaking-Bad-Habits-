@@ -95,4 +95,18 @@ Clone or download the repo.
 
 
 ### Challenges
+  
+</details>
 
+
+| CRUD      | Routes | What they do     |
+| :---        |    :----:   |          ---: |
+| Post      | /auth/register       | Here's this   |
+| Post   | /auth/login        | And more      |
+| get      | /user       | Here's this   |
+| get   | /user/habits       | And more      |
+| Post      | /auth/register       | Here's this   |
+| Post   | /auth/login        | And more      |
+| Post      | /auth/register       | Here's this   |
+| Post   | /auth/login        | And more      |
+  
