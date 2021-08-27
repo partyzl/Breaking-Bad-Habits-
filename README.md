@@ -52,11 +52,11 @@ Clone or download the repo.
 <details>
   <summary><b>Client</b></summary>
   
+  
   - HTML
   - CSS
   - JavaScript
   - [NPM](https://www.npmjs.com/)
-    - [lite-server](https://www.npmjs.com/package/lite-server)
     - [concurrently](https://www.npmjs.com/package/concurrently)
     - [watchify](https://www.npmjs.com/package/watchify)
     - [jest](https://www.npmjs.com/package/jest)
@@ -70,14 +70,12 @@ Clone or download the repo.
 - [Docker](https://www.docker.com/)
 - [NodeJs](https://nodejs.org/en/)
 - [NPM](https://www.npmjs.com/)
+
   - [express](https://www.npmjs.com/package/express)
   - [cors](https://www.npmjs.com/package/cors)
-  - [morgan](https://www.npmjs.com/package/morgan)
-  - [dayjs](https://www.npmjs.com/package/dayjs)
   - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
   - [pg](https://www.npmjs.com/package/pg)
   - [bcrypt](https://www.npmjs.com/package/bcrypt)
-  - [dotenv](https://www.npmjs.com/package/dotenv)
   - [jest](https://www.npmjs.com/package/jest)
   - [supertest](https://www.npmjs.com/package/supertest)
   - [nodemon](https://www.npmjs.com/package/nodemon)
@@ -89,8 +87,6 @@ Clone or download the repo.
 
 - [Docker](https://www.docker.com/)
 - [PostgreSQL](https://www.postgresql.org/)
-
-</details>
 
 ## Wins and Challenges
 
