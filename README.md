@@ -100,6 +100,7 @@ Clone or download the repo.
   
 </details>
 
+## Routes
 
 | CRUD      | Routes | What they do     |
 | :---        |    :----:   |          ---: |
