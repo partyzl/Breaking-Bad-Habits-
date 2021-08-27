@@ -109,7 +109,7 @@ Clone or download the repo.
 | Read      | Get      | /user/:id   |
 | Read   | Get       | /user/habits      |
 | Delete      | Delete       | /user/habits/:id   |
-| Post   | /auth/login        | And more      |
+| Put   | Update       | /user/habits/:id|
 | Post      | /auth/register       | Here's this   |
 | Post   | /auth/login        | And more      |
   
