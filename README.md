@@ -102,13 +102,13 @@ Clone or download the repo.
 
 ## Routes
 
-| CRUD      | Routes | What they do     |
+| CRUD      | Method | Routes |
 | :---        |    :----:   |          ---: |
-| Post      | /auth/register       | Here's this   |
-| Post   | /auth/login        | And more      |
-| get      | /user       | Here's this   |
-| get   | /user/habits       | And more      |
-| Post      | /auth/register       | Here's this   |
+| Create      | Post       | /auth/register  |
+| Create   | Post        | /auth/login      |
+| Read      | Get      | /user/:id   |
+| Read   | Get       | /user/habits      |
+| Delete      | Delete       | /user/habits/:id   |
 | Post   | /auth/login        | And more      |
 | Post      | /auth/register       | Here's this   |
 | Post   | /auth/login        | And more      |
