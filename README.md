@@ -106,10 +106,12 @@ Clone or download the repo.
 | :---        |    :----:   |          ---: |
 | Create      | Post       | /auth/register  |
 | Create   | Post        | /auth/login      |
+| Create      | Post       | /user/habits/:id  |
 | Read      | Get      | /user/:id   |
 | Read   | Get       | /user/habits      |
-| Delete      | Delete       | /user/habits/:id   |
 | Put   | Update       | /user/habits/:id|
-| Post      | /auth/register       | Here's this   |
-| Post   | /auth/login        | And more      |
+| Delete      | Delete       | /user/habits/:id   |
+
+
+
   
