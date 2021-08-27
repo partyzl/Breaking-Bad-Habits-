@@ -87,6 +87,8 @@ Clone or download the repo.
 
 - [Docker](https://www.docker.com/)
 - [PostgreSQL](https://www.postgresql.org/)
+  
+  </details>
 
 ## Wins and Challenges
 
