@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const router = require('express').Router();
 
+const { enhanceUnexpectedTokenMessage } = require('@jest/transform/build/enhanceUnexpectedTokenMessage');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -20,11 +21,38 @@ router.post('/register', async (req, res) => {
     }
 })
 
-router.post('/login', async (req, res) => {
+router.post('/login', async (req, res) => { //jwt token persistence method
     try {
-        
+        let user = await User.findByEmail(req.body.email); //find the user by email
+        if(!user){
+            throw new Error('User does not exist')
+        }
+        const authed = bcrypt.compare(req.body.password, user.passwordDigest) //compare given pw to our hashed one
+        if(authed){
+            const payload = {
+                username: user.username,
+                email: user.email
+            }
+            const sendToken = (err, token) => {
+                if(err){
+                    throw new Error(`Error in token generation`)
+                }
+                res.status(200)
+                .json({
+                    success: true,
+                    token: "Bearer "+ token,
+                })
+            }
+            jwt.sign(payload, process.env.SECRET, {
+                expiresIn: 3600//1 hour timelimit from token generation to sign in
+            }, sendToken);
+        } else {
+            throw new Error(`User could not be authenticated`)
+        }
     } catch (error) {
-        
+        console.log(error);
+        res.status(401)
+        .json({error});
     }
 })
 
