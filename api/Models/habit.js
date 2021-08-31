@@ -39,20 +39,47 @@ class Habit {
     });
   }
 
-  static create(habit, selectedDays, userId) {
+  static create(habit, selectedDays, username) {
     return new Promise(async (res, rej) => {
       try {
-        let result = await db.run(
-          SQL`INSERT INTO habits (habit, selectedDays, userId)
-          VALUE (${habit}, ${selectedDays}, ${userId});`
+        let habitData = await db.run(
+          SQL`INSERT INTO habits (habit, selectedDays)
+          VALUE (${habit}, ${selectedDays})
+            WHERE username = ${username};`
         );
 
-        let newHabit = new Habit(result.rows[0]);
+        let newHabit = new Habit(habitData.rows[0]);
         res(newHabit);
       } catch (error) {
         rej(`Error creating new habit: ${error}`);
       }
     });
+  }
+
+  static update(habit, selectedDAys, username){
+      return new Promise(async(res,rej)=>{
+          try {let result = await db.run(
+              SQL`UPDATE habit
+              SET selectedDays = ${selectedDAys}
+              WHERE username = ${username} AND habit = ${habit};`);
+              res(result)
+          }catch(error){
+              rej(`Error udating habit: ${error}`);
+          }
+      })
+  }
+
+  delete(habit, username){
+      return new Promise (async(res,rej)=>{
+          try{
+              let result = await db.run(
+                  SQL`DELETE FROM ${habit} 
+                  WHERE username = ${username};`)
+              res(`${habit} is removed from your list!`)
+          } catch(error){
+              rej(`Error removing ${habit} from your list`)
+          }
+      })
   }
 }
 
