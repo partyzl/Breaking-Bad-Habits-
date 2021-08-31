@@ -11,7 +11,7 @@ class Habit {
   }
 
 //  Get all habits of the user
-  static get sortByUserNAme(username){
+  static sortByUserName(username){
       return new Promise (async(res,rej)=>{
           try {
               let result = await db.run(

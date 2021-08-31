@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const {verifyToken} = require('../middleware/auth')
+const verifyToken = require('../middleware/auth')
 const User = require('../Models/user')
 
 //habit route via user
@@ -16,6 +16,8 @@ router.get('/:username', verifyToken, async (req, res) => {
         res.status(500)
         .send({error})
     }
+
+// router.use()
 })
 
 module.exports = router;
