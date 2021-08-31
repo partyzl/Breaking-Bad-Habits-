@@ -20,15 +20,15 @@ router.post('/register', async (req, res) => {
         .json({error})
     }
 })
-
+//header, payload, signature
 router.post('/login', async (req, res) => { //jwt token persistence method
     try {
         let user = await User.findByEmail(req.body.email); //find the user by email
-        if(!user){
+        if(!user){ //check if the user exists
             throw new Error('User does not exist')
         }
         const authed = bcrypt.compare(req.body.password, user.passwordDigest) //compare given pw to our hashed one
-        if(authed){
+        if(authed){ //once we know the user exists create the token
             const payload = {
                 username: user.username,
                 email: user.email
@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => { //jwt token persistence method
             }
             jwt.sign(payload, process.env.SECRET, {
                 expiresIn: 3600//1 hour timelimit from token generation to sign in
-            }, sendToken);
+            }, sendToken); //call this only when token is signed
         } else {
             throw new Error(`User could not be authenticated`)
         }
