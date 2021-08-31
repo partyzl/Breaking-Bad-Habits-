@@ -20,8 +20,8 @@ describe('User', () => {
             }
             jest.spyOn(db, 'query')
                 .mockResolvedValueOnce({rows: [...user]});
-            const result = await User.findByUserName("test@testy.com")
-            expect(result.email).toEqual(user.email)
+            const result = await User.findByUserName("testy")
+            expect(result.username).toEqual(user.username)
         }
     })
 
