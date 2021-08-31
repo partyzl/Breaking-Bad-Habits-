@@ -32,7 +32,7 @@ class User {
         })
     }
 
-    static findByEmail(email){
+    static findByUserName(email){
         return new Promise(async(res, rej)=>{
             try {
                 let result = await db.run(SQL``);
