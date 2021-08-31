@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
         .json({error})
     }
 })
-
+//header, payload, signature
 router.post('/login', async (req, res) => { //jwt token persistence method
     try {
         let user = await User.findByEmail(req.body.email); //find the user by email
