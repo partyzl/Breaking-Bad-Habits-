@@ -33,3 +33,55 @@ describe('requests', () => {
         console.warn.mockClear();
         fetch.resetMocks();
       });
+    
+      describe('postHabit', () => {
+
+          it('should make post request and call renderHabits func', async () => {
+
+              fetch.mockResponseOnce(JSON.stringify(testData))
+              await reqs.postHabit(e)
+
+              expect(fetch.mock.calls[0][1]).toHaveProperty('method', 'POST')
+              expect(fetch.mock.calls[0][0]).toMatch("http://localhost:3000/habits")
+              expect(renderHabits).toBeCalledWith([testData])
+              expect(renderHabits).toHaveBeenCalledTimes(1)
+              expect(console.warn).toHaveBeenCalledTimes(0)
+              
+            })
+
+          it("expect login to console warn error message if post fails", async () => {
+          
+                fetch.mockReject(() => Promise.reject( "error"))
+                await reqs.postHabit(e)
+      
+                expect(fetch).toHaveBeenCalledTimes(1)
+                expect(renderHabits).toHaveBeenCalledTimes(0)
+                expect(console.warn).toHaveBeenCalledTimes(1)
+                
+              })
+       })
+    
+    describe('getHabits func ', () => {
+
+        it('should make GET request', async () => {
+
+            fetch.mockResponseOnce(JSON.stringify(testData))
+            localStorage.setItem('id', 1)
+            await reqs.getAllHabbits()
+
+            expect(fetch.mock.calls[0][1]).toHaveProperty('method', 'GET')
+            expect(fetch.mock.calls[0][0]).toMatch("http://localhost:3000/habits/1")
+            expect(console.warn).toHaveBeenCalledTimes(0)
+            
+          })
+
+        it("should console warn if GET request fails", async () => {
+        
+              fetch.mockReject(() => Promise.reject( "error"))
+              await reqs.getAllHabbits()
+    
+              expect(fetch).toHaveBeenCalledTimes(1)
+              expect(console.warn).toHaveBeenCalledTimes(1)  
+            })
+     })
+
