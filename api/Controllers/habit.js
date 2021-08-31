@@ -42,7 +42,7 @@ router.post("/", verifyToken, async (req, res) => {
 
 //Update frequency of the habit
 
-route.put("/", verifyToken, async (req, res) => {
+router.put("/", verifyToken, async (req, res) => {
   try {
     const updateHabit = await Habit.update(
       req.body.habit,
@@ -57,7 +57,7 @@ route.put("/", verifyToken, async (req, res) => {
 
 //Delete habit
 
-route.delete("/", verifyToken, async (req, res) => {
+router.delete("/", verifyToken, async (req, res) => {
   try {
     let targetHabit = Habit.findById(req.param.habitId);
     await targetHabit.delete();
