@@ -18,100 +18,168 @@
     ></script>
     <title>Document</title>
   </head>
+
   <body>
-      <!-- NAVBAR -->
+    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Home</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-      
-          <div class="collapse navbar-collapse" id="navbarColor03">
-            <ul class="navbar-nav me-auto">
-              
-              <li class="nav-item">
-                <a class="nav-link" href="#"></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Create a Habit</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Account</a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Settings</a></li>
-                  <li><a class="dropdown-item" href="#">Sign Out</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Separated link</a></li>
-                </ul>
-              </li>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Home</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarColor03"
+          aria-controls="navbarColor03"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="collapse navbar-collapse" id="navbarColor03">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#"></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Create a Habit</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                data-bs-toggle="dropdown"
+                href="#"
+                role="button"
+                aria-expanded="false"
+                >Account</a
+              >
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Sign Out</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- NAVBAR END -->
 
+    <section id="header">
+      <h1>Hello, *User*</h1>
+    </section>
+    <!-- MODAL FOR HABITS -->
+    <div>
+      <button
+        type="button"
+        class="btn btn-primary mr-5"
+        data-bs-toggle="modal"
+        data-bs-target="#modalHabit"
+      >
+        Create a Habit
+      </button>
+    </div>
+    <div
+      class="modal fade"
+      id="modalHabit"
+      tabindex="-1"
+      aria-labelledby="modalHabitLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalHabitLabel">Create a Habit</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
 
-              <li class="nav-item">
-                <a class="nav-link" href="#">Account</a>
-              </li>
-            </ul>
-
-            <!-- MODAL FOR HABITS -->
-            <form class="d-flex">
-              <input class="form-control me-sm-2" type="text" placeholder="Search">
-              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
-            <div 
-            class="modal fade"
-            id="modalLogin"
-            tabindex="-1"
-            aria-labelledby="modalLoginLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="modalLoginLabel">Login</h5>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <form id="loginForm">
-                  <div class="modal-body">
-                    <div class="mb-3">
-                      <label for="emailInput" class="form-label">Email address</label>
-                      <input type="email" class="form-control" id="emailInput" />
-                    </div>
-                    <div class="mb-3">
-                      <label for="passwordInput" class="form-label">Password</label>
-                      <input
-                        type="password"
-                        class="form-control"
-                        id="passwordInput"
-                      />
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalRegister"
-                    >
-                      Register
-                    </button>
-      
-                    <button type="submit" class="btn btn-primary">Login</button>
-                  </div>
-                </form>
+          <form id="habitForm">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="nameInput" class="form-label"
+                  >Name this Habit</label
+                >
+                <input type="text" class="form-control" id="habitInput" />
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio1"
+                  value="option1"
+                />
+                <label class="form-check-label" for="inlineRadio1">To-Do</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio1"
+                  value="option1"
+                />
+                <label class="form-check-label" for="inlineRadio1"
+                  >Not-To-Do</label
+                >
+              </div>
+              <div id="weeklyFreuqeuncy">
+                <label
+                  class="
+                    checkbox-label checkbox-label--inactive
+                    task-form--inputError
+                  "
+                  >Mon<input type="checkbox"
+                /></label>
+                <label
+                  class="
+                    checkbox-label checkbox-label--inactive
+                    task-form--inputError
+                  "
+                  >Tue<input type="checkbox" /></label
+                ><label
+                  class="
+                    checkbox-label checkbox-label--inactive
+                    task-form--inputError
+                  "
+                  >Wed<input type="checkbox" /></label
+                ><label
+                  class="
+                    checkbox-label checkbox-label--inactive
+                    task-form--inputError
+                  "
+                  >Thu<input type="checkbox" /></label
+                ><label
+                  class="
+                    checkbox-label checkbox-label--inactive
+                    task-form--inputError
+                  "
+                  >Fri<input type="checkbox" /></label
+                ><label
+                  class="
+                    checkbox-label checkbox-label--inactive
+                    task-form--inputError
+                  "
+                  >Sat<input type="checkbox" /></label
+                ><label
+                  class="
+                    checkbox-label checkbox-label--inactive
+                    task-form--inputError
+                  "
+                  >Sun<input type="checkbox"
+                /></label>
               </div>
             </div>
-          </div>
-          </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Add Habit</button>
+            </div>
+          </form>
         </div>
-      </nav>
-    </nav>
+      </div>
+    </div>
   </body>
 </html>
