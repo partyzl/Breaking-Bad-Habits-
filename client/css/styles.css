@@ -11,6 +11,61 @@ body {
   font-size: 1em;
 }
 
+
+/* Header styling */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2%;
+}
+
+header img {
+  width: 10%;
+}
+
+.header-buttons {
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 7%;
+}
+
+header button {
+  background-color: transparent;
+  width: max-content;
+  flex: 1 0 auto;
+  margin: 0 2%;
+  padding: 1% 8%;
+  font-size: 1.2rem;
+}
+
+header button:hover {
+  font-weight: 600;
+}
+
+@media (max-width: 1250px) {
+  header img {
+      width: 130px;
+  }
+
+  header button {
+      padding: 1px 5px;
+      font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  header img {
+      width: 90px;
+  }
+  header button {
+      padding: 1px 5px;
+      font-size: 0.8rem;
+  }
+}
+
 .wrapper {
   margin: 15px auto;
   max-width: 1100px;
