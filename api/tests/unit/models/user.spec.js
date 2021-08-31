@@ -18,7 +18,7 @@ describe('User', () => {
                 email: "test@testy.com",
                 passwordDigest: "testpass"
             }
-            jest.spyOn(db, 'query')
+            jest.spyOn(db, 'query') //might need to fix this line bc im pooling queries with run fn
                 .mockResolvedValueOnce({rows: [...user]});
             const result = await User.findByUserName("testy")
             expect(result.username).toEqual(user.username)
@@ -26,6 +26,16 @@ describe('User', () => {
     })
 
     describe('create', () => {
-
+        test('creates new user'), async () => {
+            let user = {
+                username: "testy",
+                email: "test@testy.com",
+                passwordDigest: "testpass"
+            }
+            jest.spyOn(db, 'query') //might need to fix this line bc im pooling queries with run fn
+                .mockResolvedValueOnce({rows: [...user]});
+            const result = User.create(user)
+            expect(result).toHaveProperty('username');
+        }
     })
 })
