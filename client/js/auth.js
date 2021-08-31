@@ -1,5 +1,5 @@
 const jwt_decode = require('jwt-decode');
-const { getAllHabbits } = require('./requests');
+const { getHabits } = require('./requests');
 const API_URL = require('./url');
 
 function loginSubmit(event) {
