@@ -123,7 +123,7 @@
       aria-labelledby="modalHabitLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog  modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalHabitLabel">Create a Habit</h5>
@@ -143,74 +143,41 @@
                 >
                 <input type="text" class="form-control" id="habitInput" />
               </div>
-              <div class="form-check form-check-inline">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="inlineRadioOptions"
-                  id="inlineRadio1"
-                  value="option1"
-                />
-                <label class="form-check-label" for="inlineRadio1">To-Do</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="inlineRadioOptions"
-                  id="inlineRadio1"
-                  value="option1"
-                />
-                <label class="form-check-label" for="inlineRadio1"
-                  >Not-To-Do</label
-                >
-              </div>
-              <div id="weeklyFreuqeuncy">
-                <label
-                  class="
-                    checkbox-label checkbox-label--inactive
-                    task-form--inputError
-                  "
-                  >Mon<input type="checkbox"
-                /></label>
-                <label
-                  class="
-                    checkbox-label checkbox-label--inactive
-                    task-form--inputError
-                  "
-                  >Tue<input type="checkbox" /></label
-                ><label
-                  class="
-                    checkbox-label checkbox-label--inactive
-                    task-form--inputError
-                  "
-                  >Wed<input type="checkbox" /></label
-                ><label
-                  class="
-                    checkbox-label checkbox-label--inactive
-                    task-form--inputError
-                  "
-                  >Thu<input type="checkbox" /></label
-                ><label
-                  class="
-                    checkbox-label checkbox-label--inactive
-                    task-form--inputError
-                  "
-                  >Fri<input type="checkbox" /></label
-                ><label
-                  class="
-                    checkbox-label checkbox-label--inactive
-                    task-form--inputError
-                  "
-                  >Sat<input type="checkbox" /></label
-                ><label
-                  class="
-                    checkbox-label checkbox-label--inactive
-                    task-form--inputError
-                  "
-                  >Sun<input type="checkbox"
-                /></label>
-              </div>
+
+              <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradio" id="toDoBtn" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="toDoBtn">To-Do</label>
+              
+                <input type="radio" class="btn-check" name="btnradio" id="notToDoBtn" autocomplete="off">
+                <label class="btn btn-outline-primary" for="notToDoBtn">Not-To-Do</label>
+               
+                <div id="weeklyFrequency">
+             
+                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                  <input type="checkbox" class="btn-check" id="monBtn" autocomplete="off">
+                  <label class="btn btn-outline-primary" for="monBtn">Mon</label>
+                
+                  <input type="checkbox" class="btn-check" id="tueBtn" autocomplete="off">
+                  <label class="btn btn-outline-primary" for="tueBtn">Tue</label>
+                
+                  <input type="checkbox" class="btn-check" id="wedBtn" autocomplete="off">
+                  <label class="btn btn-outline-primary" for="wedBtn">Wed</label>
+
+                  <input type="checkbox" class="btn-check" id="thuBtn" autocomplete="off">
+                  <label class="btn btn-outline-primary" for="thuBtn">Thu</label>
+                  <input type="checkbox" class="btn-check" id="friBtn" autocomplete="off">
+                  <label class="btn btn-outline-primary" for="friBtn">Fri</label>
+
+                  <input type="checkbox" class="btn-check" id="satBtn" autocomplete="off">
+                  <label class="btn btn-outline-primary" for="satBtn">Sat</label>
+                  <input type="checkbox" class="btn-check" id="sunBtn" autocomplete="off">
+                  <label class="btn btn-outline-primary" for="sunBtn">Sun</label>
+
+                </div>
+
+
+
+
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-primary">Add Habit</button>
