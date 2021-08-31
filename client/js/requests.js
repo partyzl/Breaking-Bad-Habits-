@@ -42,7 +42,7 @@ async function seeAllStreaks(user) {
 }
 
 // add habit
-async function addHabit(e, user) {
+async function postHabit(e, user) {
     e.preventDefault();
     try {
         const options = {
@@ -94,7 +94,7 @@ module.exports = {
     getOneHabit,
     seeStreaks,
     seeAllStreaks,
-    addHabit,
+    postHabit,
     updateHabit,
     dangerZone,
     deleteHabit
