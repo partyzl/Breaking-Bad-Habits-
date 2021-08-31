@@ -23,3 +23,13 @@ function registerSubmit(event) {
 
 const registerForm = document.getElementById("registerForm");
 registerForm.addEventListener("submit", registerSubmit);
+
+function logout(){
+    localStorage.clear();
+    location.reload();
+}
+
+function currentUser(){
+    const username = localStorage.getItem('username')
+    return username;
+}
