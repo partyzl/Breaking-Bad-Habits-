@@ -16,3 +16,16 @@ router.get('/', verifyToken, async (req, res) => {
         .send({error})
     }
 })
+
+//Read habit by id
+router.get('/:id', verifyToken, async (req, res) => {
+    try {
+        const id = req.params;
+        const result = await Habit.findById(id);
+        res.status(200)
+        .send({result})
+    } catch (error) {
+        res.status(500)
+        .send(error)
+    }
+})
