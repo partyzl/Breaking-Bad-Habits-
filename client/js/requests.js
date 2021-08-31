@@ -4,8 +4,8 @@ async function getHabits(user) {
         const response = await fetch(`http://localhost:3000/${user}`);
         const data = await response.json();
         return data;
-    } catch (error) {
-
+    } catch (err) {
+        console.warn(err);
     }
 }
 
@@ -15,8 +15,8 @@ async function getOneHabit(user, habitId) {
         const response = await fetch(`http://localhost:3000/${user}/${habitId}`);
         const data = await response.json();
         return data;
-    } catch (error) {
-
+    } catch (err) {
+        console.warn(err);
     }
 }
 
@@ -26,7 +26,7 @@ async function seeStreaks(user, habitId) {
         const response = await fetch(`http://localhost:3000/${user}/${habitId}`);
         const data = await response.json();
         return data;
-    } catch (error) {
+    } catch (err) {
         console.warn(err);
     }
 }
@@ -36,7 +36,7 @@ async function seeAllStreaks(user) {
         const response = await fetch(`http://localhost:3000/${user}`);
         const data = await response.json();
         return data;
-    } catch (error) {
+    } catch (err) {
         console.warn(err);
     }
 }
@@ -53,8 +53,7 @@ async function postHabit(e, user) {
         const response = await fetch(`http://localhost:3000/${user}`, options);
         const newHabit = await response.json();
         return (newHabit);
-
-    } catch (error) {
+    } catch (err) {
         console.warn(err);
     }
 }
@@ -63,7 +62,7 @@ async function postHabit(e, user) {
 async function updateHabit(user, habitId) {
     try {
         // change habit name 
-    } catch (error) {
+    } catch (err) {
         console.warn(err);
     }
 }
@@ -72,7 +71,7 @@ async function updateHabit(user, habitId) {
 async function dangerZone(user, habitId) {
     try {
         // reset tracker
-    } catch (error) {
+    } catch (err) {
         console.warn(err);
     }
 }
@@ -84,7 +83,7 @@ async function deleteHabit(user, habitId) {
             method: 'DELETE'
         }
         await fetch(`http://localhost:3000/${user}/${habitId}`, options);
-    } catch (error) {
+    } catch (err) {
         console.warn(err);
     }
 }

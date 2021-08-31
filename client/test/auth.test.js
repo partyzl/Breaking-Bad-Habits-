@@ -5,6 +5,7 @@
 global.fetch = require('jest-fetch-mock');
 console.warn = jest.fn();
 
+
 let auth = require('../js/auth');
 
 describe('auth tests', () => {
@@ -13,6 +14,7 @@ describe('auth tests', () => {
     let e;
 
     beforeAll(() => {
+
         form = document.createElement('form');
         form.innerHTML =
             `<input type="text" name="username" value="abc" >

@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-
+global.fetch = require('jest-fetch-mock');
 const functions = require('../js/requests')
 
 
@@ -44,9 +44,10 @@ describe('requests', () => {
 
             fetch.mockResponseOnce(JSON.stringify(testData))
             await reqs.postHabit(e)
+            let user = "username"
 
             expect(fetch.mock.calls[0][1]).toHaveProperty('method', 'POST')
-            expect(fetch.mock.calls[0][0]).toMatch("http://localhost:3000/habits")
+            expect(fetch.mock.calls[0][0]).toMatch(`http://localhost:3000/${user}`)
             expect(renderHabits).toBeCalledWith([testData])
             expect(renderHabits).toHaveBeenCalledTimes(1)
             expect(console.warn).toHaveBeenCalledTimes(0)
@@ -71,7 +72,7 @@ describe('requests', () => {
 
             fetch.mockResponseOnce(JSON.stringify(testData))
             localStorage.setItem('id', 1)
-            await reqs.getAllHabbits()
+            await reqs.getHabits()
 
             expect(fetch.mock.calls[0][1]).toHaveProperty('method', 'GET')
             expect(fetch.mock.calls[0][0]).toMatch("http://localhost:3000/habits/1")
@@ -82,7 +83,7 @@ describe('requests', () => {
         it("should console warn if GET request fails", async() => {
 
             fetch.mockReject(() => Promise.reject("error"))
-            await reqs.getAllHabbits()
+            await reqs.getHabits()
 
             expect(fetch).toHaveBeenCalledTimes(1)
             expect(console.warn).toHaveBeenCalledTimes(1)
