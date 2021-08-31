@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const { verifyToken } = require("../middleware/auth");
+const verifyToken = require("../middleware/auth");
 
 const User = require("../Models/user");
 const Habit = require("../Models/habit");
@@ -66,3 +66,5 @@ router.delete("/", verifyToken, async (req, res) => {
     res.status(404).send(error);
   }
 });
+
+module.exports = router;

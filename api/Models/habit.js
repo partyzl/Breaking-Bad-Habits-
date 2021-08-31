@@ -10,6 +10,7 @@ class Habit {
     this.selectedDays = data.selectedDays;
   }
 
+<<<<<<< HEAD
   //  Get all habits of the user
   static sortByUserName(username) {
     return new Promise(async (res, rej) => {
@@ -24,6 +25,21 @@ class Habit {
         rej(`Error finding habits: ${error}`);
       }
     });
+=======
+//  Get all habits of the user
+  static sortByUserName(username){
+      return new Promise (async(res,rej)=>{
+          try {
+              let result = await db.run(
+                  SQL`SELECT habit, selectedDays FROM habit 
+                  WHERE username = ${username};`);
+                let habits = result.rows.map((r) => new Habit(r));
+                res(habits);
+          } catch (error){
+              rej(`Error finding habits: ${error}`);
+          }
+      })
+>>>>>>> 1c4f3616164ce0f47f16d3180500a010b8616ab8
   }
 
   //   find specific habit by habitId

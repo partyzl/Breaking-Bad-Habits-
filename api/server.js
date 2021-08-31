@@ -1,16 +1,16 @@
 const express = require('express');
 const cors = require('cors');
 
-const server = express();
-server.use(cors());
-server.use(express.json());
+const app = express();
+app.use(cors());
+app.use(express.json());
 
 const authRoutes = require('./Controllers/auth');
 const userRoutes = require('./Controllers/user');
 
-server.get('/', (req,res)=> res.send('Shut it'));
+app.use('/user', userRoutes);
+app.use('/auth', authRoutes);
 
-server.use('/user', userRoutes);
-server.use('/auth', authRoutes);
+app.get('/', (req,res)=> res.send('Shut it'));
 
-module.exports = router;
+module.exports = app;
