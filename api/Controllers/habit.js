@@ -29,3 +29,18 @@ router.get('/:id', verifyToken, async (req, res) => {
         .send(error)
     }
 })
+
+//Create habit for user
+router.post('/', verifyToken, async (req, res) =>{
+    try {
+        const newHabit = await Habit.create({...req.body, username: req.username});
+        res.status(201)
+        .send({newHabit})
+    } catch (error) {
+        res.status(500)
+        .send({error})
+    }
+})
+
+//Update habit 
+//Delete habit 
