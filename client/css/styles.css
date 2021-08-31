@@ -7,10 +7,20 @@ html {
 
 body {
   margin: 0;
-  background: #504f4f;
-  font-size: 1em;
+  font-family: 'Prompt', sans-serif;
+  color: white;
+  background: #202731;
+  overflow-x: hidden;
 }
 
+section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 400px;
+  padding-top: 100px;
+}
 
 /* Header styling */
 header {
@@ -64,6 +74,20 @@ header button:hover {
       padding: 1px 5px;
       font-size: 0.8rem;
   }
+}
+
+/* Section endings */
+
+.spacer {
+  aspect-ratio: 960/540;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.layer1 {
+  background-image: url('./images/layered-waves-haikei.svg');
 }
 
 .wrapper {
