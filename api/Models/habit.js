@@ -10,6 +10,7 @@ class Habit {
     this.selectedDays = data.selectedDays;
   }
 
+//  Get all habits of the user
   static get sortByUserNAme(username){
       return new Promise (async(res,rej)=>{
           try {
@@ -24,6 +25,7 @@ class Habit {
       })
   }
 
+//   find specific habit by habitId
   static findById(habitId) {
     return new Promise(async (res, rej) => {
       try {
@@ -39,6 +41,7 @@ class Habit {
     });
   }
 
+//   create new habit
   static create(habit, selectedDays, username) {
     return new Promise(async (res, rej) => {
       try {
@@ -56,6 +59,7 @@ class Habit {
     });
   }
 
+//  update the frequency of the habit
   static update(habit, selectedDAys, username){
       return new Promise(async(res,rej)=>{
           try {let result = await db.run(

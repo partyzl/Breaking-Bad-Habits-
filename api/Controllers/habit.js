@@ -40,7 +40,7 @@ router.post("/", verifyToken, async (req, res) => {
   }
 });
 
-//Update habit
+//Update frequency of the habit
 
 route.put("/", verifyToken, async (req, res) => {
   try {
