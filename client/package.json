@@ -17,5 +17,8 @@
         "jest-fetch-mock": "^3.0.3",
         "nodemon": "^2.0.12",
         "watchify": "^4.0.0"
+    },
+    "dependencies": {
+        "jwt-decode": "^3.1.2"
     }
 }
