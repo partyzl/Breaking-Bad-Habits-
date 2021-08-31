@@ -88,3 +88,5 @@ async function deleteHabit(user, habitId) {
         console.warn(err);
     }
 }
+
+module.exports = { getHabits, getOneHabit, seeStreaks, seeAllStreaks, addHabit, updateHabit, dangerZone, deleteHabit }
