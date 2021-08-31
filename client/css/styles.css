@@ -7,7 +7,7 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Prompt', sans-serif;
+  font-family: "Prompt", sans-serif;
   color: white;
   background: #202731;
   overflow-x: hidden;
@@ -42,37 +42,28 @@ header img {
   padding-right: 7%;
 }
 
-header button {
-  background-color: transparent;
-  width: max-content;
-  flex: 1 0 auto;
-  margin: 0 2%;
-  padding: 1% 8%;
-  font-size: 1.2rem;
-}
-
-header button:hover {
-  font-weight: 600;
+.modal-dialog {
+  color: black;
 }
 
 @media (max-width: 1250px) {
   header img {
-      width: 130px;
+    width: 130px;
   }
 
   header button {
-      padding: 1px 5px;
-      font-size: 1.5rem;
+    padding: 1px 5px;
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 500px) {
   header img {
-      width: 90px;
+    width: 90px;
   }
   header button {
-      padding: 1px 5px;
-      font-size: 0.8rem;
+    padding: 1px 5px;
+    font-size: 0.8rem;
   }
 }
 
@@ -87,7 +78,7 @@ header button:hover {
 }
 
 .layer1 {
-  background-image: url('./images/layered-waves-haikei.svg');
+  background-image: url("./images/layered-waves-haikei.svg");
 }
 
 .wrapper {

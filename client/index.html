@@ -23,30 +23,20 @@
     <title>Document</title>
   </head>
 
-  <header>
-    <img src="images/logo.png" alt="logo" />
-    <div class="header-buttons">
-        <button>Features</button>
-        <button>Team</button>
-        <button onclick="document.getElementById('login').style.display='block'" style="width:auto;">Login</button>
-        <button onclick="document.getElementById('register').style.display='block'" style="width:auto;">Register</button>
-    </div>
-</header>
-
+  
   <body class="container">
     <section class="mb-5">
-      <h1>Breaking (bad) Habits</h1>
+      <h1>Habitual</h1>
       <h3>
-        Develop good habits and eliminate bad ones by tracking them with *new
-        title*
+        Develop good habits and eliminate bad ones by tracking them with Habitual.
       </h3>
     </section>
 
     <!-- Button trigger modal -->
-    <div>
+    <div id="logregbutton">
       <button
         type="button"
-        class="btn btn-primary mr-5"
+        class="btn btn-primary mr-5 loginbutton"
         data-bs-toggle="modal"
         data-bs-target="#modalLogin"
       >
@@ -55,7 +45,7 @@
 
       <button
         type="button"
-        class="btn btn-primary ml-5"
+        class="btn btn-primary ml-5 registerbutton"
         data-bs-toggle="modal"
         data-bs-target="#modalRegister"
       >
