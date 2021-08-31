@@ -1,7 +1,7 @@
 version: '3'
 services:
   client:
-    container_name: debug_dev_client
+    container_name: habit_dev_client
     build: ./client
     image: debug_client
     ports:
