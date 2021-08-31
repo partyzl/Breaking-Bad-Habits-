@@ -2,9 +2,9 @@ const User = require('../../../Models/user');
 const db = require('../../../dbConfig');
 
 const pg = require('pg');
-const { describe } = require('yargs');
-const { beforeEach, afterAll, test } = require('jest-circus');
-const { jest, expect } = require('@jest/globals');
+// const { describe } = require('yargs');
+// const { beforeEach, afterAll, test } = require('jest-circus');
+// const { jest, expect } = require('@jest/globals');
 jest.mock('pg')
 
 describe('User', () => {
