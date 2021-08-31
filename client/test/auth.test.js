@@ -1,7 +1,11 @@
+/**
+ * @jest-environment jsdom
+ */
+
 global.fetch = require('jest-fetch-mock');
 console.warn = jest.fn();
 
-let auth = require('../auth');
+let auth = require('../js/auth');
 
 describe('auth tests', () => {
 

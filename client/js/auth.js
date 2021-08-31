@@ -7,7 +7,7 @@ function loginSubmit(event) {
     event.preventDefault();
 }
 
-const loginForm = document.getElementById("loginForm");
+const loginForm = document.getElementById('loginForm');
 loginForm.addEventListener("submit", loginSubmit);
 
 function registerSubmit(event) {
@@ -39,16 +39,16 @@ async function requestRegistration(e) {
         }
         const r = await fetch(`${API_URL}/auth/register`, options)
         const data = await r.json()
-        if (data.err){ throw Error(data.err) }
+        if (data.err) { throw Error(data.err) }
         requestLogin(e);
     } catch (err) {
         console.warn(err);
     }
 }
 
-async function requestLogin(e){
+async function requestLogin(e) {
     e.preventDefault();
-    
+
     try {
         let formData = new FormData(e.target)
         const options = {
@@ -66,7 +66,7 @@ async function requestLogin(e){
     }
 }
 
-function login(token){
+function login(token) {
     const user = jwt_decode(token);
     localStorage.setItem("token", token);
     localStorage.setItem("id", user.id);
@@ -76,19 +76,19 @@ function login(token){
     landing.className = "hide-page";
     const habit = document.getElementById('habit-page');
     habit.className = "";
-    document.getElementById('register').style.display='none'
-    document.getElementById('login').style.display='none'
-    document.querySelector('.header-buttons').style.display='none'
+    document.getElementById('register').style.display = 'none'
+    document.getElementById('login').style.display = 'none'
+    document.querySelector('.header-buttons').style.display = 'none'
 
     getHabits();
 }
 
-function logout(){
+function logout() {
     localStorage.clear();
     location.reload();
 }
 
-function currentUser(){
+function currentUser() {
     const username = localStorage.getItem('username')
     return username;
 }

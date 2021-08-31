@@ -1,8 +1,11 @@
-const functions = require('../requests')
+/**
+ * @jest-environment jsdom
+ */
+
+const functions = require('../js/requests')
 
 
-
-let reqs = require('../requests')
+let reqs = require('../js/requests')
 
 describe('requests', () => {
 
@@ -29,9 +32,9 @@ describe('requests', () => {
     }
 
     beforeEach(() => {
-        updateStreak.mockClear()
-        renderHabits.mockClear();
-        console.warn.mockClear();
+        // updateStreak.mockClear()
+        // renderHabits.mockClear();
+        // console.warn.mockClear();
         fetch.resetMocks();
     });
 
