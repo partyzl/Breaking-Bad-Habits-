@@ -5,13 +5,13 @@ class User {
   constructor(data) {
     this.username = data.username;
     this.email = data.email;
-    this.passwordDigest = data.password_Digest; //encrypted
+    this.passwordDigest = data.password_digest; //encrypted
   }
 
   static get all() {
     return new Promise(async (res, rej) => {
       try {
-        let result = await db.run(SQL``);
+        let result = await db.run(SQL`SELECT * FROM users`);
         let users = result.rows.map((r) => new User(r));
         res(users);
       } catch (error) {
@@ -23,7 +23,8 @@ class User {
   static create({ username, email, password }) {
     return new Promise(async (res, rej) => {
       try {
-        let result = await db.run(SQL``);
+        let result = await db.run(SQL`INSERT INTO users (username, email, password_digest)
+                                        VALUES (${username}, ${email}, ${password})`);
         let newUser = new User(result.rows[0]);
         res(newUser);
       } catch (error) {
@@ -35,7 +36,7 @@ class User {
   static findByUserName(username) {
     return new Promise(async (res, rej) => {
       try {
-        let result = await db.run(SQL``);
+        let result = await db.run(SQL`SELECT * FROM users WHERE username = ${username};`);
         let user = new User(result.rows[0]);
         res(user);
       } catch (error) {
