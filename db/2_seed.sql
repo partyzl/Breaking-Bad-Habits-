@@ -10,9 +10,9 @@ VALUES
 INSERT INTO habits (username, habit, selectedDays)
 VALUES  
 
-    ('cerise-at', 'running a 5k', 6),
-    ('cerise-at', 'going to the gym', [2,4,6]),
-    ('sallan464', 'waking up at 5', [1,2,3,4,5]);
+    ('cerise-at', 'running a 5k', '{6}'),
+    ('cerise-at', 'going to the gym', '{2,4,6}'),
+    ('sallan464', 'waking up at 5', '{1,2,3,4,5}');
 
 INSERT INTO track (habitId, streak, date)
 VALUES

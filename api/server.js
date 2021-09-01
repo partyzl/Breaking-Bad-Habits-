@@ -11,6 +11,6 @@ const userRoutes = require('./Controllers/user');
 app.use('/user', userRoutes);
 app.use('/auth', authRoutes);
 
-app.get('/', (req,res)=> res.send('Shut it'));
+app.get('/', (req, res) => res.send('Shut it'));
 
 module.exports = app;
