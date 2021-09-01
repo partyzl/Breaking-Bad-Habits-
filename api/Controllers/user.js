@@ -3,10 +3,6 @@ const router = require('express').Router();
 const verifyToken = require('../middleware/auth')
 const User = require('../Models/user')
 
-//habit route via user
-const habitRoutes = require('./habit')
-router.use('/:username/habits', habitRoutes)
-    //habit route via user
 
 router.get('/:username', verifyToken, async(req, res) => {
     try {
@@ -16,17 +12,22 @@ router.get('/:username', verifyToken, async(req, res) => {
     } catch (error) {
         console.log("not a user")
         res.status(500)
-            .send({ error })
+        .send({ error })
     }
-
-    // router.use()
 })
-
-// logout
+    
+    // router.use()
+    
+    // logout
 router.get('/logout', function (req, res) {
     req.logout();
     req.session.destroy();
     res.redirect('/');
 });
+    
+//habit route via user
+const habitRoutes = require('./habit')
+router.use('/:username/habits', habitRoutes)
+//habit route via user
 
 module.exports = router;

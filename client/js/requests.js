@@ -1,7 +1,8 @@
 // get all habits 
-async function getHabits(user) {
+async function getHabits(username) {
     try {
-        const response = await fetch(`http://localhost:3000/${user}`);
+        const options = { headers: new Headers({ 'Authorization': localStorage.getItem('token') }) }
+        const response = await fetch(`http://localhost:3000/user/${username}`, options);
         const data = await response.json();
         return data;
     } catch (err) {
