@@ -3,17 +3,17 @@ const router = require('express').Router();
 const verifyToken = require('../middleware/auth')
 const User = require('../Models/user')
 
-router.get('/', async(req, res) => {
+router.get('/', verifyToken, async(req, res) => {
     try {
         const result = await User.all
-        res(result);
+        res.json(result);
     } catch (error) {
         res.status(500)
         .json({error})      
     }
 })
 
-router.get('/:username', verifyToken, async(req, res) => {
+router.get('/:username', async(req, res) => {
     try {
        // console.log('the user')
         const user = await User.findByUserName(req.params.username);
