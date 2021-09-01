@@ -3,7 +3,7 @@ require('dotenv').config();
 const router = require('express').Router();
 
 //const { enhanceUnexpectedTokenMessage } = require('@jest/transform/build/enhanceUnexpectedTokenMessage'); //this got auto imported, not sure if necessary
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../Models/user')
