@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/dashboardstyles.css" />
+    <link rel="stylesheet" href="./css/dashboard-styles.css" />
     
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link
@@ -13,7 +13,7 @@
       integrity="sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX"
       crossorigin="anonymous"
     />
-    <script defer src="js/bundle.js" type="text/javascript module" ></script>
+    <script defer src="js/calendar.js"></script>
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
@@ -74,7 +74,50 @@
       <h1>Hello, *User*</h1>
     </section>
 
-    <div class="wrapper">
+    <section id ="calendar">
+    <div id="container">
+      <div id="header">
+        <div id="monthDisplay"></div>
+        <div>
+          <button id="backButton">Back</button>
+          <button id="nextButton">Next</button>
+        </div>
+      </div>
+
+      <div id="weekdays">
+        <div>Sunday</div>
+        <div>Monday</div>
+        <div>Tuesday</div>
+        <div>Wednesday</div>
+        <div>Thursday</div>
+        <div>Friday</div>
+        <div>Saturday</div>
+      </div>
+
+      <div id="calendar"></div>
+    </div>
+
+    <div id="newEventModal">
+      <h2>New Event</h2>
+
+      <input id="eventTitleInput" placeholder="Event Title" />
+
+      <button id="saveButton">Save</button>
+      <button id="cancelButton">Cancel</button>
+    </div>
+
+    <div id="deleteEventModal">
+      <h2>Event</h2>
+
+      <p id="eventText"></p>
+
+      <button id="deleteButton">Delete</button>
+      <button id="closeButton">Close</button>
+    </div>
+
+    <div id="modalBackDrop"></div>
+  </section>
+    <!-- <div class="wrapper">
       <div class="container-calendar">
         <h3 id="monthAndYear"></h3>
         <div class="button-container-calendar">
@@ -107,7 +150,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
      
   <!-- BUTTON FOR CREATE HABIT -->
