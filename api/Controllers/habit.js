@@ -1,13 +1,13 @@
 const router = require("express").Router();
 
-const { verifyToken } = require("../middleware/auth");
+//const { verifyToken } = require("../middleware/auth");
 
 const User = require("../Models/user");
 const Habit = require("../Models/habit");
 const { route } = require("./auth");
 
 //Read all habits for user
-router.get("/", verifyToken, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const result = await Habit.sortByUserName(req.username);
     res.status(200).json({ result });
@@ -17,7 +17,7 @@ router.get("/", verifyToken, async (req, res) => {
 });
 
 //Read habit by id
-router.get("/:id", verifyToken, async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const id = req.params;
     const result = await Habit.findById(id);
@@ -28,7 +28,7 @@ router.get("/:id", verifyToken, async (req, res) => {
 });
 
 //Create habit for user
-router.post("/", verifyToken, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const newHabit = await Habit.create({
       ...req.body,
@@ -42,7 +42,7 @@ router.post("/", verifyToken, async (req, res) => {
 
 //Update frequency of the habit
 
-router.put("/", verifyToken, async (req, res) => {
+router.put("/", async (req, res) => {
   try {
     const updateHabit = await Habit.update(
       req.body.habit,
@@ -57,7 +57,7 @@ router.put("/", verifyToken, async (req, res) => {
 
 //Delete habit
 
-router.delete("/", verifyToken, async (req, res) => {
+router.delete("/", async (req, res) => {
   try {
     let targetHabit = Habit.findById(req.param.habitId);
     await targetHabit.delete();
