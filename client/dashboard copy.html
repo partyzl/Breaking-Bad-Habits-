@@ -5,8 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/dashboardstyles.css" />
-    
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css"
@@ -21,14 +19,14 @@
       crossorigin="anonymous"
     ></script>
 
-    <title>Habitual</title>
+    <title>Microhabits</title>
   </head>
 
   <body>
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#modalHabit"><img src="css/images/zap.svg"></a>
+        <a class="navbar-brand" href="#"><img src="css/images/zap.svg"></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -44,6 +42,9 @@
         <div class="collapse navbar-collapse" id="navbarColor03">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
+              <a class="nav-link" href="#"></a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" src="#modalHabit">Create a Habit</a>
             </li>
             <li class="nav-item dropdown">
@@ -57,9 +58,7 @@
               >
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a id="sign-out"class="dropdown-item" href="#">Sign Out</a></li>
-                <div >
-                  <button id="logout">Sign Out</button> 
+                <li><a class="dropdown-item" href="#">Sign Out</a></li>
               </ul>
             </li>
           </ul>
@@ -67,10 +66,10 @@
       </div>
     </nav>
     <!-- NAVBAR END -->
-
     <section id="hero" class="d-flex align-items-center">
     <section id="header" class="container position-relative" data-aos="fade-up" data-aos-delay="500">
       
+        
       <h1>Hello, *User*</h1>
     </section>
 
@@ -107,11 +106,21 @@
         </div>
       </div>
     </div>
-  </section>
 
+  </div>
+  </section>
+  <section id="landing" class="hide-page">
      
-  <!-- BUTTON FOR CREATE HABIT -->
-   
+      <div id="sign-out">
+          <button id="logout">Sign Out</button> 
+      </div>
+          
+      <div id="habit-list">
+          
+      </div>
+      </section>
+      
+    <!-- MODAL FOR HABITS -->
     <div>
       <button
         type="button"
@@ -129,7 +138,6 @@
       aria-labelledby="modalHabitLabel"
       aria-hidden="true"
     >
-     <!-- MODAL FOR HABITS -->
       <div class="modal-dialog  modal-lg">
         <div class="modal-content">
           <div class="modal-header">
@@ -157,9 +165,10 @@
               
                 <input type="radio" class="btn-check" name="btnradio" id="notToDoBtn" autocomplete="off">
                 <label class="btn btn-outline-primary" for="notToDoBtn">Not-To-Do</label>
-               </div>
+               
                 <div id="weeklyFrequency">
              
+                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                   <input type="checkbox" class="btn-check" id="monBtn" autocomplete="off">
                   <label class="btn btn-outline-primary" for="monBtn">Mon</label>
                 
@@ -178,6 +187,8 @@
                   <label class="btn btn-outline-primary" for="satBtn">Sat</label>
                   <input type="checkbox" class="btn-check" id="sunBtn" autocomplete="off">
                   <label class="btn btn-outline-primary" for="sunBtn">Sun</label>
+
+                </div>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-primary">Add Habit</button>
@@ -185,6 +196,6 @@
           </form>
         </div>
       </div>
-    <!-- MODAL END -->
+    </div>
   </body>
 </html>

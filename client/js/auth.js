@@ -11,7 +11,6 @@ function loginSubmit(event) {
 }
 
 function registerSubmit(event) {
-  event.preventDefault();
   const passwordValue = document.getElementById("registerPasswordInput").value;
   const confirmPasswordValue = document.getElementById(
     "confirmPasswordInput"
@@ -20,6 +19,7 @@ function registerSubmit(event) {
     window.location.assign("dashboard.html");
   } else if (confirmPasswordValue != passwordValue) {
     document.getElementById("confirmPasswordInput").setCustomValidity(true);
+    event.preventDefault();
   }
   registerForm.classList.add("was-validated");
   event.stopPropagation();
