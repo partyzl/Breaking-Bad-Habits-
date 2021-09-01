@@ -10,27 +10,12 @@ class Habit {
     this.selectedDays = data.selectedDays;
   }
 
-<<<<<<< HEAD
-  //  Get all habits of the user
-  static sortByUserName(username) {
-    return new Promise(async (res, rej) => {
-      try {
-        let result = await db.run(
-          SQL`SELECT habit, selectedDays FROM habit 
-                  WHERE username = ${username};`
-        );
-        let habits = result.rows.map((r) => new Habit(r));
-        res(habits);
-      } catch (error) {
-        rej(`Error finding habits: ${error}`);
-      }
-    });
-=======
+
 //  Get all habits of the user
   static sortByUserName(username){
       return new Promise (async(res,rej)=>{
           try {
-              let result = await db.run(
+              let result = await db.query(
                   SQL`SELECT habit, selectedDays FROM habit 
                   WHERE username = ${username};`);
                 let habits = result.rows.map((r) => new Habit(r));
@@ -39,14 +24,13 @@ class Habit {
               rej(`Error finding habits: ${error}`);
           }
       })
->>>>>>> 1c4f3616164ce0f47f16d3180500a010b8616ab8
   }
 
   //   find specific habit by habitId
   static findById(habitId) {
     return new Promise(async (res, rej) => {
       try {
-        let result = await db.run(
+        let result = await db.query(
           SQL`SELECT * FROM habit 
           WHERE habitId = ${habitId};`
         );
@@ -62,7 +46,7 @@ class Habit {
   static create(habit, selectedDays, username) {
     return new Promise(async (res, rej) => {
       try {
-        let habitData = await db.run(
+        let habitData = await db.query(
           SQL`INSERT INTO habits (habit, selectedDays)
           VALUE (${habit}, ${selectedDays})
             WHERE username = ${username};`
@@ -76,12 +60,11 @@ class Habit {
     });
   }
 
-  //  update the frequency of the habit
-  static update(habit, selectedDAys, username) {
-    return new Promise(async (res, rej) => {
-      try {
-        let result = await db.run(
-          SQL`UPDATE habit
+//  update the frequency of the habit
+  static update(habit, selectedDAys, username){
+      return new Promise(async(res,rej)=>{
+          try {let result = await db.query(
+              SQL`UPDATE habit
               SET selectedDays = ${selectedDAys}
               WHERE username = ${username} AND habit = ${habit};`
         );
@@ -92,18 +75,17 @@ class Habit {
     });
   }
 
-  delete(habit, username) {
-    return new Promise(async (res, rej) => {
-      try {
-        let result = await db.run(
-          SQL`DELETE FROM ${habit} 
-                  WHERE username = ${username};`
-        );
-        res(`${habit} is removed from your list!`);
-      } catch (error) {
-        rej(`Error removing ${habit} from your list`);
-      }
-    });
+  delete(habit, username){
+      return new Promise (async(res,rej)=>{
+          try{
+              let result = await db.query(
+                  SQL`DELETE FROM ${habit} 
+                  WHERE username = ${username};`)
+              res(`${habit} is removed from your list!`)
+          } catch(error){
+              rej(`Error removing ${habit} from your list`)
+          }
+      })
   }
 }
 
