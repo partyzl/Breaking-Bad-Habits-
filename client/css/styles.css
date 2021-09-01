@@ -131,6 +131,7 @@ h6 {
 }
 
 .concepts h3, h4 {
+  font-family: 'Quicksand', sans-serif; 
   color: rgb(0, 0, 0);
   margin-bottom: 30px;
   font-size: 24px;
@@ -147,6 +148,7 @@ h6 {
   margin: 0 auto;
   width: 64px;
   height: 64px;
+  background: #ff9d1c;
   transition: all 0.3s ease-out 0s;
   display: flex;
   align-items: center;
@@ -157,7 +159,7 @@ h6 {
 
 .concepts .icon-box .icon i {
   color: #fff;
-  font-size: 28px;
+  font-size: 40px;
 }
 
 .concepts .icon-box .icon::before {
@@ -189,23 +191,27 @@ h6 {
 }
 
 .concepts .icon-box:hover {
-  background: #cc1616;
-  border-color: #cc1616;
+  background: #ff9d1c;
+  border-color: #ff9d1c;
   padding: 70px 20px 90px 20px;
   color: #ffffff;
 }
 
-/* .concepts .icon-box:hover .icon {
+.concepts .icon-box:hover .icon {
   background: #fff;
-} */
+}
 
-/* .concepts .icon-box:hover .icon i {
+.concepts .icon-box:hover .icon i {
   color: #cc1616;
-} */
+}
 
-/* .concepts .icon-box:hover .icon::before {
-  background: #e82d2d;
-} */
+.concepts .icon-box:hover .icon::before {
+  background: #a54c10;
+}
+
+.concepts .icon-box:hover .icon i::before {
+  color: #cc1616;
+}
 
 .concepts .icon-box:hover h4 {
   color: #ffffff;
