@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 const verifyToken = (req, res, next) => {
+    console.log(req);
     const header = req.headers['authorization'];
     if(header) {
         const token = header.split(' ')[1]; //splitting the bearer token at the space and keeping the token
