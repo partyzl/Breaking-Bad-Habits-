@@ -87,10 +87,10 @@ function login(token) {
   getHabits();
 }
 
-function logout() {
-  localStorage.clear();
-  location.reload();
-}
+// function logout() {
+//   localStorage.clear();
+//   location.reload();
+// }
 
 function currentUser() {
   const username = localStorage.getItem("username");
