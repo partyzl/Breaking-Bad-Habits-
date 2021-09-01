@@ -1,8 +1,9 @@
+const herokuUrl = "https://habitual-lap2.herokuapp.com/"
 // get all habits 
 async function getHabits(username) {
     try {
         const options = { headers: new Headers({ 'Authorization': localStorage.getItem('token') }) }
-        const response = await fetch(`http://localhost:3000/user/${username}`, options);
+        const response = await fetch(`${herokuUrl}/user/${username}`, options);
         const data = await response.json();
         return data;
     } catch (err) {
