@@ -22,4 +22,11 @@ router.get('/:username', verifyToken, async(req, res) => {
     // router.use()
 })
 
+// logout
+router.get('/logout', function (req, res) {
+    req.logout();
+    req.session.destroy();
+    res.redirect('/');
+});
+
 module.exports = router;
