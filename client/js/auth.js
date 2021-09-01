@@ -1,14 +1,15 @@
-const jwt_decode = require('jwt-decode');
-const { getHabits } = require('./requests');
-const API_URL = require('./url');
+import jwt_decode from 'jwtDecode';
+import { getHabits } from './requests';
+import API_URL from './url';
+
+
+const loginForm = document.getElementById("loginForm");
+loginForm.addEventListener("submit", loginSubmit);
 
 function loginSubmit(event) {
     window.location.assign("dashboard.html");
     event.preventDefault();
 }
-
-const loginForm = document.getElementById('loginForm');
-loginForm.addEventListener("submit", loginSubmit);
 
 function registerSubmit(event) {
     event.preventDefault();
@@ -31,15 +32,17 @@ registerForm.addEventListener("submit", registerSubmit);
 async function requestRegistration(e) {
     e.preventDefault();
     try {
-        let formData = new FormData(e.tarqget)
+        let formData = new FormData(e.target);
         const options = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(formData))
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(Object.fromEntries(formData)),
+        };
+        const r = await fetch(`${API_URL}/auth/register`, options);
+        const data = await r.json();
+        if (data.err) {
+            throw Error(data.err);
         }
-        const r = await fetch(`${API_URL}/auth/register`, options)
-        const data = await r.json()
-        if (data.err) { throw Error(data.err) }
         requestLogin(e);
     } catch (err) {
         console.warn(err);
@@ -50,16 +53,18 @@ async function requestLogin(e) {
     e.preventDefault();
 
     try {
-        let formData = new FormData(e.target)
+        let formData = new FormData(e.target);
         const options = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(formData))
-        }
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(Object.fromEntries(formData)),
+        };
 
-        const r = await fetch(`${API_URL}/auth/login`, options)
-        const data = await r.json()
-        if (!data.success) { throw new Error('Login not authorised'); }
+        const r = await fetch(`${API_URL}/auth/login`, options);
+        const data = await r.json();
+        if (!data.success) {
+            throw new Error("Login not authorised");
+        }
         login(data.token);
     } catch (err) {
         console.warn(err);
@@ -72,13 +77,13 @@ function login(token) {
     localStorage.setItem("id", user.id);
     localStorage.setItem("username", user.username);
 
-    const landing = document.getElementById('landing');
+    const landing = document.getElementById("landing");
     landing.className = "hide-page";
-    const habit = document.getElementById('habit-page');
+    const habit = document.getElementById("habit-page");
     habit.className = "";
-    document.getElementById('register').style.display = 'none'
-    document.getElementById('login').style.display = 'none'
-    document.querySelector('.header-buttons').style.display = 'none'
+    document.getElementById("register").style.display = "none";
+    document.getElementById("login").style.display = "none";
+    document.querySelector(".header-buttons").style.display = "none";
 
     getHabits();
 }
@@ -89,8 +94,15 @@ function logout() {
 }
 
 function currentUser() {
-    const username = localStorage.getItem('username')
+    const username = localStorage.getItem("username");
     return username;
 }
 
-module.exports = { registerSubmit, requestLogin, requestRegistration, logout, currentUser, login }
+module.exports = {
+    registerSubmit,
+    requestLogin,
+    requestRegistration,
+    logout,
+    currentUser,
+    login,
+};
