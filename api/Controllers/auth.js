@@ -23,7 +23,7 @@ router.post('/register', async (req, res) => {
 //header, payload, signature
 router.post('/login', async (req, res) => { //jwt token persistence method
     try {
-        let user = await User.findByUserName(req.body.username); //find the user by email
+        let user = await User.findByUserName(req.body.username); //find the user by username
         if(!user){ //check if the user exists
             throw new Error('User does not exist')
         }
