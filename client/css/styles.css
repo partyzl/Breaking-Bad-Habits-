@@ -122,9 +122,15 @@ h6 {
   color: rgb(0, 0, 0);
 }
 
-.concepts h2,
-h3,
-h4 {
+.concepts .section-title h2 {
+  font-family: 'Quicksand', sans-serif; 
+  font-size: 45px;
+  margin-bottom: 2em;
+  margin-top: 3em;
+  text-align: center;
+}
+
+.concepts h3, h4 {
   color: rgb(0, 0, 0);
   margin-bottom: 30px;
   font-size: 24px;
@@ -150,10 +156,10 @@ h4 {
   transform-style: preserve-3d;
 }
 
-.concepts .icon-box .icon i {
+/* .concepts .icon-box .icon i {
   color: #fff;
   font-size: 28px;
-}
+} */
 
 .concepts .icon-box .icon::before {
   position: absolute;
@@ -187,22 +193,26 @@ h4 {
   background: #cc1616;
   border-color: #cc1616;
   padding: 70px 20px 90px 20px;
+  color: #ffffff;
 }
 
-.concepts .icon-box:hover .icon {
+/* .concepts .icon-box:hover .icon {
   background: #fff;
-}
+} */
 
-.concepts .icon-box:hover .icon i {
+/* .concepts .icon-box:hover .icon i {
   color: #cc1616;
-}
+} */
 
-.concepts .icon-box:hover .icon::before {
+/* .concepts .icon-box:hover .icon::before {
   background: #e82d2d;
+} */
+
+.concepts .icon-box:hover h4 {
+  color: #ffffff;
 }
 
-.concepts .icon-box:hover h4 a,
-.services .icon-box:hover p {
+.concepts .icon-box:hover p {
   color: #fff;
 }
 
@@ -269,6 +279,7 @@ h4 {
   padding: 2px 0 2px 0;
   line-height: 1;
   font-weight: 300;
+  color: #ffffff;
 }
 
 #footer .footer-top .footer-contact p {
