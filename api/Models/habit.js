@@ -14,9 +14,9 @@ class Habit {
   static sortByUserName(username) {
     return new Promise(async (res, rej) => {
       try {
-        let result = await db.run(
+        let result = await db.query(
           SQL`SELECT habit, selectedDays FROM habit 
-                  WHERE username = ${username};`
+          WHERE username = ${username};`
         );
         let habits = result.rows.map((r) => new Habit(r));
         res(habits);
@@ -30,7 +30,7 @@ class Habit {
   static findById(habitId) {
     return new Promise(async (res, rej) => {
       try {
-        let result = await db.run(
+        let result = await db.query(
           SQL`SELECT * FROM habit 
           WHERE habitId = ${habitId};`
         );
@@ -46,10 +46,10 @@ class Habit {
   static create(habit, selectedDays, username) {
     return new Promise(async (res, rej) => {
       try {
-        let habitData = await db.run(
-          SQL`INSERT INTO habits (habit, selectedDays)
-          VALUE (${habit}, ${selectedDays})
-            WHERE username = ${username};`
+        let habitData = await db.query(
+          SQL`INSERT INTO habits (habit, selectedDays) 
+          VALUE (${habit}, ${selectedDays}) 
+          WHERE username = ${username};`
         );
 
         let newHabit = new Habit(habitData.rows[0]);
@@ -64,10 +64,10 @@ class Habit {
   static update(habit, selectedDAys, username) {
     return new Promise(async (res, rej) => {
       try {
-        let result = await db.run(
-          SQL`UPDATE habit
-              SET selectedDays = ${selectedDAys}
-              WHERE username = ${username} AND habit = ${habit};`
+        let result = await db.query(
+          SQL`UPDATE habit 
+          SET selectedDays = ${selectedDAys} 
+          WHERE username = ${username} AND habit = ${habit};`
         );
         res(result);
       } catch (error) {
@@ -79,13 +79,43 @@ class Habit {
   delete(habit, username) {
     return new Promise(async (res, rej) => {
       try {
-        let result = await db.run(
+        let result = await db.query(
           SQL`DELETE FROM ${habit} 
-                  WHERE username = ${username};`
+          WHERE username = ${username};`
         );
         res(`${habit} is removed from your list!`);
       } catch (error) {
         rej(`Error removing ${habit} from your list`);
+      }
+    });
+  }
+
+  static checkHabitId(habit, username) {
+    return new Promise(async (res, rej) => {
+      try {
+        let targetHabitId = await db.query(
+          SQL`SELECT habitId FROM habits 
+            WHERE habit = ${habit} AND username = ${username};`
+        );
+        res(targetHabitId);
+      } catch (error) {
+        rej(`Error finding habit Id: ${error}`);
+      }
+    });
+  }
+
+  static checkRecord(habit, username) {
+    return new Promise(async (res, rej) => {
+      try {
+        let habitId = this.checkHabitId(habit, username);
+        let result = await db.query(
+          SQL`SELECT date FROM track 
+          WHERE habitId = ${habitId};`
+        );
+        let record = result.rows.map((r) => new Habit(r));
+        res(record);
+      } catch (error) {
+        rej(`Error retrieving habit record: ${error}`);
       }
     });
   }
