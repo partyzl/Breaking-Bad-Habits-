@@ -12,6 +12,8 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@babel/core": "^7.15.0",
+        "babelify": "^10.0.0",
         "concurrently": "^6.2.1",
         "jest": "^27.1.0",
         "jest-fetch-mock": "^3.0.3",

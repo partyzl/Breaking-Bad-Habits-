@@ -5,7 +5,12 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Raleway", sans-serif;
 }
 
@@ -15,7 +20,6 @@ h1, h2, h3, h4, h5, h6 {
 #hero {
   width: 100%;
   height: 100vh;
-  aspect-ratio: 960/540;
   background: url("./images/layered-waves-haikei.svg");
   background-repeat: no-repeat;
   background-position: center;
@@ -49,7 +53,7 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Concept Section
 --------------------------------------------------------------*/
- .concepts {
+.concepts {
   width: 100%;
   height: 100vh;
   aspect-ratio: 960/540;
@@ -76,11 +80,13 @@ h1, h2, h3, h4, h5, h6 {
   color: rgb(0, 0, 0);
 }
 
-.concepts h2, h3, h4 {
+.concepts h2,
+h3,
+h4 {
   color: rgb(0, 0, 0);
   margin-bottom: 30px;
   font-size: 24px;
-} 
+}
 
 .concepts .icon-box {
   text-align: center;
@@ -94,7 +100,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 64px;
   height: 64px;
   background: #cc1616;
-  transition: all .3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -109,13 +115,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .concepts .icon-box .icon::before {
   position: absolute;
-  content: '';
+  content: "";
   left: -8px;
   top: -8px;
   height: 100%;
   width: 100%;
   background: #fce5e5;
-  transition: all .3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
   transform: translateZ(-1px);
 }
 
@@ -153,7 +159,8 @@ h1, h2, h3, h4, h5, h6 {
   background: #e82d2d;
 }
 
-.concepts .icon-box:hover h4 a, .services .icon-box:hover p {
+.concepts .icon-box:hover h4 a,
+.services .icon-box:hover p {
   color: #fff;
 }
 
@@ -187,12 +194,13 @@ h1, h2, h3, h4, h5, h6 {
   color: rgb(0, 0, 0);
 }
 
-#hero3 h2, h3, h4 {
+#hero3 h2,
+h3,
+h4 {
   color: rgb(0, 0, 0);
   margin-bottom: 30px;
   font-size: 24px;
 }
-
 
 /*--------------------------------------------------------------
 # Footer
@@ -201,7 +209,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #ffffff;
   font-size: 14px;
   background: #576774;
-  }
+}
 
 #footer .footer-top {
   padding: 60px 0 30px 0;
