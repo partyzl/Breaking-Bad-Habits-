@@ -2,7 +2,7 @@ INSERT INTO users (username, email, password_digest)
 VALUES
 
     ('partyzl', 'parth@parth.com', 'password'),
-    ('cerise-at', 'cerise@cerise.come', 'password'),
+    ('cerise-at', 'cerise@cerise.com', 'password'),
     ('abi-mcp', 'abi@abi.com', 'password'),
     ('kenneth-cwy', 'ken@ken.com', 'password'),
     ('sallan464', 'simon@simon.com', 'password');
