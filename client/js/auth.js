@@ -1,4 +1,4 @@
-import jwt_decode from 'jwtDecode';
+import jwt_decode from 'jwt-decode';
 import { getHabits } from './requests';
 import API_URL from './url';
 
