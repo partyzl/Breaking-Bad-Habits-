@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS  users (
 );
 
 CREATE TABLE IF NOT EXISTS habits (
-    habitId int serial,
+    habitId serial,
     username varchar(25) NOT NULL,
     habit varchar(100) NOT NULL,
     selectedDays int[],
