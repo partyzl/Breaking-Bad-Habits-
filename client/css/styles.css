@@ -238,10 +238,34 @@ h6 {
   text-align: center;
 }
 
+.reviews h3 {
+  font-size: 10px;
+  color: rgb(0, 0, 0);
+  font-family: 'Quicksand', sans-serif; 
+  font-size: 45px;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  text-align: center;
+  color: #ffffff;
+}
+
 .reviews p {
   margin-bottom: 30px;
   font-size: 24px;
   text-align: center;
+  color: #000000;
+}
+
+.reviews .card  {
+  align-items: center;
+  box-shadow: 0 0px 50px 0 rgba(61, 52, 52, 0.329), 0 0px 50px 0 rgba(49, 42, 42, 0.466);
+  padding: 30px 5px 10px 5px;
+  margin-bottom: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+  background-color: white;
+}
 }
 
 .reviews .card .stars {
@@ -249,10 +273,10 @@ h6 {
   align-items: center;
 }
 
-.reviews .card p {
+/* .reviews .card p .review-comment {
   padding-left: 1.5rem;
   text-align: center;
-}
+}  */
 
 .reviews .card .p2 {
   padding-left: 1.5rem;
@@ -276,12 +300,6 @@ h6 {
   clear: both;
 }
 
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 30px 5px;
-  text-align: center;
-  background-color: white;
-}
 
 @media (max-width: 1250px) {
   .stars {
@@ -320,7 +338,7 @@ h6 {
 }
 
 #footer .footer-top {
-  padding: 60px 0 30px 0;
+  padding: 5px 0 5px 0;
   color: #ffffff;
   background: #001220;
 }
