@@ -31,7 +31,7 @@ registerForm.addEventListener("submit", registerSubmit);
 async function requestRegistration(e) {
     e.preventDefault();
     try {
-        let formData = new FormData(e.target)
+        let formData = new FormData(e.tarqget)
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
