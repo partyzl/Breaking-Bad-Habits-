@@ -1,0 +1,49 @@
+version: '3'
+services:
+  client:
+    container_name: habit_dev_client
+    build: ./client
+    image: debug_client
+    ports:
+      - 8080:8080
+    working_dir: /code
+    volumes:
+      - type: bind
+        source: ./client
+        target: /code
+    command: [ "http-server" ]
+  server:
+    image: node:14
+    working_dir: /server
+    ports: 
+      - 3000:3000
+    environment: 
+      - PORT=3000
+      - PGUSER=lap2portfolio
+      - PGHOST=db
+      - PGPASSWORD=password
+      - PGDATABASE=habit-db
+      - PGPORT=5432
+    depends_on:
+      - db
+    volumes:
+      - type: bind
+        source: ./api
+        target: /server
+    command: bash -c "npm install && npm run dev"
+  db:
+    image: postgres:latest
+    ports:
+      - 35432:5432
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+      - "./db/:/docker-entrypoint-initdb.d/:ro"
+    environment: 
+      - POSTGRES_DB=habit-db
+      - POSTGRES_USER=lap2portfolio
+      - POSTGRES_PASSWORD=password
+volumes:
+  dbdata:
+networks:
+  default:
+    name: debug_api
