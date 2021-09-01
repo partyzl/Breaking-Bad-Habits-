@@ -14,7 +14,7 @@ class Habit {
   static sortByUserName(username){
       return new Promise (async(res,rej)=>{
           try {
-              let result = await db.run(
+              let result = await db.query(
                   SQL`SELECT habit, selectedDays FROM habit 
                   WHERE username = ${username};`);
                 let habits = result.rows.map((r) => new Habit(r));
@@ -29,7 +29,7 @@ class Habit {
   static findById(habitId) {
     return new Promise(async (res, rej) => {
       try {
-        let result = await db.run(
+        let result = await db.query(
           SQL`SELECT * FROM habit 
           WHERE habitId = ${habitId};`
         );
@@ -45,7 +45,7 @@ class Habit {
   static create(habit, selectedDays, username) {
     return new Promise(async (res, rej) => {
       try {
-        let habitData = await db.run(
+        let habitData = await db.query(
           SQL`INSERT INTO habits (habit, selectedDays)
           VALUE (${habit}, ${selectedDays})
             WHERE username = ${username};`
@@ -62,7 +62,7 @@ class Habit {
 //  update the frequency of the habit
   static update(habit, selectedDAys, username){
       return new Promise(async(res,rej)=>{
-          try {let result = await db.run(
+          try {let result = await db.query(
               SQL`UPDATE habit
               SET selectedDays = ${selectedDAys}
               WHERE username = ${username} AND habit = ${habit};`);
@@ -76,7 +76,7 @@ class Habit {
   delete(habit, username){
       return new Promise (async(res,rej)=>{
           try{
-              let result = await db.run(
+              let result = await db.query(
                   SQL`DELETE FROM ${habit} 
                   WHERE username = ${username};`)
               res(`${habit} is removed from your list!`)
