@@ -10,6 +10,7 @@ class Habit {
     this.selectedDays = data.selectedDays;
   }
 
+
 //  Get all habits of the user
   static sortByUserName(username){
       return new Promise (async(res,rej)=>{
@@ -25,7 +26,7 @@ class Habit {
       })
   }
 
-//   find specific habit by habitId
+  //   find specific habit by habitId
   static findById(habitId) {
     return new Promise(async (res, rej) => {
       try {
@@ -41,7 +42,7 @@ class Habit {
     });
   }
 
-//   create new habit
+  //   create new habit
   static create(habit, selectedDays, username) {
     return new Promise(async (res, rej) => {
       try {
@@ -65,12 +66,13 @@ class Habit {
           try {let result = await db.query(
               SQL`UPDATE habit
               SET selectedDays = ${selectedDAys}
-              WHERE username = ${username} AND habit = ${habit};`);
-              res(result)
-          }catch(error){
-              rej(`Error udating habit: ${error}`);
-          }
-      })
+              WHERE username = ${username} AND habit = ${habit};`
+        );
+        res(result);
+      } catch (error) {
+        rej(`Error udating habit: ${error}`);
+      }
+    });
   }
 
   delete(habit, username){
