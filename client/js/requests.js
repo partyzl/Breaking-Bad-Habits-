@@ -1,7 +1,8 @@
 // get all habits 
-async function getHabits(user) {
+async function getHabits(username) {
     try {
-        const response = await fetch(`http://localhost:3000/${user}`);
+        const options = { headers: new Headers({ 'Authorization': localStorage.getItem('token') }) }
+        const response = await fetch(`http://localhost:3000/user/${username}`, options);
         const data = await response.json();
         return data;
     } catch (err) {
@@ -10,9 +11,9 @@ async function getHabits(user) {
 }
 
 // get specific habit 
-async function getOneHabit(user, habitId) {
+async function getOneHabit(username, habitId) {
     try {
-        const response = await fetch(`http://localhost:3000/${user}/${habitId}`);
+        const response = await fetch(`http://localhost:3000/${username}/${habitId}`);
         const data = await response.json();
         return data;
     } catch (err) {
@@ -21,9 +22,9 @@ async function getOneHabit(user, habitId) {
 }
 
 // see streak for one habit
-async function seeStreaks(user, habitId) {
+async function seeStreaks(username, habitId) {
     try {
-        const response = await fetch(`http://localhost:3000/${user}/${habitId}`);
+        const response = await fetch(`http://localhost:3000/${username}/${habitId}`);
         const data = await response.json();
         return data;
     } catch (err) {
