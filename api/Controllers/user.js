@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const verifyToken = require('../middleware/auth')
+const { verifyToken } = require('../middleware/auth')
 const User = require('../Models/user')
 
 //habit route via user
