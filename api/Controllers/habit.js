@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
 
 //Update frequency of the habit
 
-router.put("/", async (req, res) => {
+router.patch("/", async (req, res) => {
   try {
     const updateHabit = await Habit.update(
       req.body.habit,
