@@ -47,27 +47,23 @@ function registerSubmit(event) {
     }
   }
   
-  async function requestLogin(e) {
-    e.preventDefault();
+  async function requestLogin(data) {
+  //  e.preventDefault();
     
     try {
       //let formData = new FormData(e.target);
       const options = {
         method: "POST",
-        headers: { "Content-Type": "application/json"
-                 },
-        body: JSON.stringify({
-          username: e.target.email.value,
-          password: e.target.password.value
-        })
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify(data)
       };
       
       const r = await fetch(`${API_URL}/auth/login`, options);
-      const data = await r.json();
-      if (!data.success) {
+      const rJson = await r.json();
+      if (!rJson.success) {
         throw new Error("Login not authorised");
       }
-      login(data.token);
+      login(rJson.token);
     } catch (err) {
       console.warn(err);
     }
