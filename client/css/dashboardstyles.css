@@ -25,10 +25,10 @@ body {
 } 
 
 #hero h1 {
-  margin-top: -400px;
+  margin-top: -120px;
   margin-bottom: 1em;
   font-family: "Quicksand", sans-serif;
-  font-size: 64px;
+  font-size: 50px;
   text-align: center;
   color: #ffffff;
 }
@@ -37,18 +37,15 @@ body {
 # Calendar
 --------------------------------------------------------------*/
 
-button {
-  width: 75px;
-  cursor: pointer;
-  box-shadow: 0px 0px 2px gray;
-  border: none;
-  outline: none;
-  padding: 5px;
-  border-radius: 5px;
-  color: white;
+#calendar-container {
+  width: 770px;
+  display: inline-block;
+  justify-content: space-between;
 }
 
 #calendar-header {
+  margin-left: 65%;
+  transform: translate(-60%, 0, 0, 0);
   padding: 10px;
   color: #d36c6c;
   font-size: 26px;
@@ -58,15 +55,23 @@ button {
 }
 
 #calendar-header button {
+  margin-left: 65%;
+  transform: translate(-60%, 0, 0, 0);
   background-color: #92a1d1;
-}
-
-#calendar-container {
-  width: 770px;
+  width: 75px;
+  cursor: pointer;
+  box-shadow: 0px 0px 2px gray;
+  border: none;
+  outline: none;
+  padding: 0px;
+  border-radius: 5px;
+  color: white;
 }
 
 #weekdays {
   width: 100%;
+  margin-left: 70%;
+  transform: translate(-70%, 0, 0, 0);
   display: flex;
   color: #247ba0;
 }
@@ -78,9 +83,15 @@ button {
 
 #calendar {
   width: 100%;
-  margin: auto;
+  margin-left: 70%;
+  transform: translate(-70%, 0, 0, 0);
+  /* margin: auto; */
   display: flex;
   flex-wrap: wrap;
+  /* position: fixed; */
+  /* top: 50%;
+  left: 50%;
+   */
 }
 
 .day {
