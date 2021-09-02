@@ -1,7 +1,9 @@
 
 // import getHabits from "./requests";
 // import API_URL from "./url";
-const API_URL = "http://localhost:3000"
+const API_URL = window.location.hostname.includes('localhost')
+	? 'http://localhost:3000'
+	: 'https://habitual-lap2.herokuapp.com/';
 
 
 function loginSubmit(event) {
@@ -74,19 +76,10 @@ function registerSubmit(event) {
     }
   }
   
-  function login(token, user) {
+  function login(token, username) {
     localStorage.setItem("token", token);
-    //localStorage.setItem("email", user.email);
-    localStorage.setItem("username", user);
-    
-    // const landing = document.getElementById("landing");
-    // landing.className = "hide-page";
-    const habit = document.getElementById("habit-page");
-    habit.className = "";
-    document.getElementById("register").style.display = "none";
-    document.getElementById("login").style.display = "none";
-    document.querySelector(".header-buttons").style.display = "none";
-    
+    localStorage.setItem("username", username);
+
     window.location.assign("dashboard.html");
     //getHabits();
 }
