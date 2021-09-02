@@ -51,12 +51,15 @@ function registerSubmit(event) {
     e.preventDefault();
     
     try {
-      let formData = new FormData(e.target);
+      //let formData = new FormData(e.target);
       const options = {
         method: "POST",
-        headers: { "Content-Type": "application/json",
-                  "authorization":"Bearer " },
-        body: JSON.stringify(Object.fromEntries(formData)),
+        headers: { "Content-Type": "application/json"
+                 },
+        body: JSON.stringify({
+          username: e.target.email.value,
+          password: e.target.password.value
+        })
       };
       
       const r = await fetch(`${API_URL}/auth/login`, options);
@@ -73,8 +76,8 @@ function registerSubmit(event) {
   function login(token) {
     const user = jwt_decode(token);
     localStorage.setItem("token", token);
-    localStorage.setItem("email", user.email);
-    //localStorage.setItem("username", user.username);
+    //localStorage.setItem("email", user.email);
+    localStorage.setItem("username", user.username);
     
     const landing = document.getElementById("landing");
     landing.className = "hide-page";

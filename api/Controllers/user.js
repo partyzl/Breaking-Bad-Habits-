@@ -16,7 +16,7 @@ router.get('/', verifyToken, async(req, res) => {
 router.get('/:username', async(req, res) => {
     try {
        // console.log('the user')
-        const user = await User.findByUserName(req.params.email);
+        const user = await User.findByUserName(req.params.username);
         res.json(user);
     } catch (error) {
        // console.log("not a user")
