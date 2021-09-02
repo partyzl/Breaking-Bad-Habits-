@@ -89,6 +89,7 @@ class Habit {
     });
   }
 
+  //  Check HabitId with username and habit for updating the track databse when user to checkin
   static checkHabitId(habit, username) {
     return new Promise(async (res, rej) => {
       try {
@@ -103,6 +104,7 @@ class Habit {
     });
   }
 
+  //   Check the date difference for updating the streak when user checkin
   static checkDateDiff(habit, username) {
     return new Promise(async (res, rej) => {
       try {
@@ -140,6 +142,7 @@ class Habit {
     });
   }
 
+  //   The algo that updates the latest streak
   static calculateStreak(habit, username) {
     return new Promise(async (res, rej) => {
       try {
@@ -161,7 +164,8 @@ class Habit {
     });
   }
 
-  static checkIn(habit, username) {
+  //   User checkin function
+  static checkin(habit, username) {
     return new Promise(async (res, rej) => {
       try {
         let habitId = this.checkHabitId(habit, username);
