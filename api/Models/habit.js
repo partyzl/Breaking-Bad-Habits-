@@ -104,18 +104,60 @@ class Habit {
     });
   }
 
-  static checkRecord(habit, username) {
+  static checkDateDiff(habit, username) {
     return new Promise(async (res, rej) => {
       try {
         let habitId = this.checkHabitId(habit, username);
-        let result = await db.query(
-          SQL`SELECT date FROM track 
-          WHERE habitId = ${habitId};`
+        let dateDiff = await db.query(
+          SQL`SELECT DATEDIFF
+          (day, (SELECT MAX(date) FROM track 
+          WHERE habitId = ${habitId}), 
+          GETDATE());`
         );
-        let record = result.rows.map((r) => new Habit(r));
-        res(record);
+        res(dateDiff);
       } catch (error) {
-        rej(`Error retrieving habit record: ${error}`);
+        rej(`Error checking DateDiff: ${error}`);
+      }
+    });
+  }
+
+  static checkWeekdayDiff(habit, username) {
+    return new Promise(async (res, rej) => {
+      try {
+        let selectedDays = await db.query(
+          SQL`SELECT selectedDays FROM habits 
+          WHERE habit = ${habit} AND username = ${username};`
+        );
+        let dayDiffArr = [];
+        for (let day of selectedDays) {
+          dayDiffArr.push(
+            Math.abs(day - selectedDays[selectedDays.indexOf(day) + 1])
+          );
+        }
+        res(dayDiffArr);
+      } catch (error) {
+        rej(`Error checking sleceted weekdays: ${error}`);
+      }
+    });
+  }
+
+  static calculateStreak(habit, username) {
+    return new Promise(async (res, rej) => {
+      try {
+        let dateDiff = this.checkDateDiff(habit, username);
+        let dayDiffArr = this.checkWeekdayDiff(habit, username);
+        if (dateDiff > 7 || !dayDiffArr.includes(dateDiff)) {
+          let streak = 1;
+        } else {
+          let streak = await db.query(
+            SQL`SELECT streak FROM 
+            (SELECT streak, MAX(date) FROM track);`
+          );
+          streak++;
+        }
+        res(streak);
+      } catch (error) {
+        rej(`Error calculating streak: ${error}`);
       }
     });
   }
