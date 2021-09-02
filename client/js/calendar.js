@@ -15,8 +15,8 @@ function openModal(date) {
   const eventForDay = events.find(e => e.date === clicked);
 
   if (eventForDay) {
-    document.getElementById('eventText').innerText = eventForDay.title;
     deleteEventModal.style.display = 'block';
+    document.getElementById('eventText').innerText = eventForDay.title;
   } else {
     newEventModal.style.display = 'block';
   }
@@ -131,6 +131,8 @@ function initButtons() {
 }
 
 let i = 0;
+
+
 
 function progress() {
   if (i === 0) {
