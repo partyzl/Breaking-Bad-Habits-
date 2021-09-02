@@ -1,7 +1,27 @@
 // get all habits 
+const herokuUrl = 'https://habitual-lap2.herokuapp.com'
+
+async function getUsers() {
+    try {
+        const options = { headers: new Headers({ 'authorization': localStorage.getItem('token') }) }
+        console.log("got here")
+        const response = await fetch('http://localhost:3000/user', options);
+        console.log("and here")
+        const data = await response.json();
+        if (data.err) {
+            console.warn(data.err);
+            //logout();
+        }
+        console.log("and also here")
+        return data;
+    } catch (err) {
+        console.warn(err);
+    }
+}
+
 async function getHabits(user) {
     try {
-        const response = await fetch(`http://localhost:3000/${user}`);
+        const response = await fetch(`${herokuUrl}/user/${user}`);
         const data = await response.json();
         return data;
     } catch (err) {
@@ -12,7 +32,7 @@ async function getHabits(user) {
 // get specific habit 
 async function getOneHabit(user, habitId) {
     try {
-        const response = await fetch(`http://localhost:3000/${user}/${habitId}`);
+        const response = await fetch(`${herokuUrl}/user/${user}/${habitId}`);
         const data = await response.json();
         return data;
     } catch (err) {
@@ -23,7 +43,7 @@ async function getOneHabit(user, habitId) {
 // see streak for one habit
 async function seeStreaks(user, habitId) {
     try {
-        const response = await fetch(`http://localhost:3000/${user}/${habitId}`);
+        const response = await fetch(`${herokuUrl}/user/${user}/${habitId}`);
         const data = await response.json();
         return data;
     } catch (err) {
@@ -33,7 +53,7 @@ async function seeStreaks(user, habitId) {
 
 async function seeAllStreaks(user) {
     try {
-        const response = await fetch(`http://localhost:3000/${user}`);
+        const response = await fetch(`${herokuUrl}/user/${user}`);
         const data = await response.json();
         return data;
     } catch (err) {
@@ -50,7 +70,7 @@ async function postHabit(e, user) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
         }
-        const response = await fetch(`http://localhost:3000/${user}`, options);
+        const response = await fetch(`${herokuUrl}/user/${user}`, options);
         const newHabit = await response.json();
         return (newHabit);
     } catch (err) {
@@ -96,5 +116,6 @@ module.exports = {
     postHabit,
     updateHabit,
     dangerZone,
-    deleteHabit
+    deleteHabit,
+    getUsers
 }
