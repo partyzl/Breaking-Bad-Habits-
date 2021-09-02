@@ -1,5 +1,3 @@
-
-
 // import getHabits from "./requests";
 // import API_URL from "./url";
 const API_URL = window.location.hostname.includes('localhost')
