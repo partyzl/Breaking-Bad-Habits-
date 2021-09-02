@@ -1,4 +1,3 @@
-
 let nav = 0;
 let clicked = null;
 let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
@@ -131,9 +130,6 @@ function initButtons() {
   document.getElementById('closeButton').addEventListener('click', closeModal);
 }
 
-initButtons();
-load();
-
 let i = 0;
 
 function progress() {
@@ -154,6 +150,10 @@ function progress() {
     }
   }
 }
+
+initButtons();
+load();
+
 
 // function generate_year_range(start, end) {
 //     let years = "";
