@@ -27,8 +27,21 @@ describe('User', () => {
             expect(result.username).toEqual(user.username)
         })
 
-    });
+        test('returns error', async () => {
+            const userData = {
+                username: 'testy', 
+                email: 'test@testy.com', 
+                password_digest: 'password'};
+            const username = userData.username;
 
+            try {
+                jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
+                await User.findByUserName(username);
+            } catch (err) {
+                expect(err).toContain('Error retrieving user:');
+            }
+        })
+    })
 
     describe('create', () => {
         test('creates new user', async() => {
@@ -43,6 +56,20 @@ describe('User', () => {
             expect(result).toHaveProperty('username');
         })
 
+        test('returns error on bad create', async () => {
+            const newUser = {
+                username: 'testy', 
+                email: 'test@testy.com', 
+                password: 'password'};
+
+            try {
+                jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
+                await User.create(newUser);
+            } catch (err) {
+                expect(err).toContain('Error creating user:');
+            }
+        })
+
     });
 
     describe('getAll', () => {
@@ -55,5 +82,4 @@ describe('User', () => {
             expect(all.length).toEqual(5)
         })
     })
-
-})
+});
