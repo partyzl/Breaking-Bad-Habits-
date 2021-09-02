@@ -12,30 +12,30 @@ describe('User', () => {
     afterAll(() => jest.resetAllMocks());
 
     describe('find by username', () => {
-        test('shows user by username'), async () => {
+        test('shows user by username', async() => {
             let user = {
                 username: "testy",
                 email: "test@testy.com",
                 passwordDigest: "testpass"
             }
             jest.spyOn(db, 'query') //might need to fix this line bc im pooling queries with run fn
-                .mockResolvedValueOnce({rows: [...user]});
+                .mockResolvedValueOnce({ rows: [user] });
             const result = await User.findByUserName("testy")
             expect(result.username).toEqual(user.username)
-        }
-    })
+        })
+    });
 
     describe('create', () => {
-        test('creates new user'), async () => {
+        test('creates new user', async() => {
             let user = {
                 username: "testy",
                 email: "test@testy.com",
                 passwordDigest: "testpass"
             }
             jest.spyOn(db, 'query') //might need to fix this line bc im pooling queries with run fn
-                .mockResolvedValueOnce({rows: [...user]});
-            const result = User.create(user)
+                .mockResolvedValueOnce({ rows: [user] });
+            const result = await User.create(user)
             expect(result).toHaveProperty('username');
-        }
-    })
+        })
+    });
 })
