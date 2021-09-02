@@ -12,9 +12,9 @@ async function getHabits(username) {
 }
 
 // get specific habit 
-async function getOneHabit(user, habitId) {
+async function getOneHabit(username, habitId) {
     try {
-        const response = await fetch(`http://localhost:3000/${user}/${habitId}`);
+        const response = await fetch(`http://localhost:3000/user/${username}/${habitId}`);
         const data = await response.json();
         return data;
     } catch (err) {
@@ -23,9 +23,9 @@ async function getOneHabit(user, habitId) {
 }
 
 // see streak for one habit
-async function seeStreaks(user, habitId) {
+async function seeStreaks(username, habitId) {
     try {
-        const response = await fetch(`http://localhost:3000/${user}/${habitId}`);
+        const response = await fetch(`http://localhost:3000/user/${username}/${habitId}`);
         const data = await response.json();
         return data;
     } catch (err) {
@@ -33,9 +33,9 @@ async function seeStreaks(user, habitId) {
     }
 }
 
-async function seeAllStreaks(user) {
+async function seeAllStreaks(username) {
     try {
-        const response = await fetch(`http://localhost:3000/${user}`);
+        const response = await fetch(`http://localhost:3000/user/${username}`);
         const data = await response.json();
         return data;
     } catch (err) {
@@ -52,7 +52,7 @@ async function postHabit(e, user) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
         }
-        const response = await fetch(`http://localhost:3000/${user}`, options);
+        const response = await fetch(`http://localhost:3000/user/${username}/habits`, options);
         const newHabit = await response.json();
         return (newHabit);
     } catch (err) {
