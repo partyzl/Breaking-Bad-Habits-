@@ -14,14 +14,14 @@ body {
 /*--------------------------------------------------------------
 # Hero
 --------------------------------------------------------------*/
-#hero {
+/* #hero {
   width: 100%;
   height: 100vh;
   background: url("./images/wave-haikei.svg");
   background-repeat: no-repeat;
-  background-position: top;
+  background-position: center;
   background-size: cover; 
-} 
+}  */
 
 #hero h1 {
   margin: 0;
