@@ -10,6 +10,7 @@ class Habit {
         this.selectedDays = data.selectedDays;
     }
 
+
 //  Get all habits of the user
   static sortByUserName(username){
       return new Promise (async(res,rej)=>{
@@ -27,7 +28,7 @@ class Habit {
     }
 
 
-//   find specific habit by habitId
+  //   find specific habit by habitId
   static findById(habitId) {
     return new Promise(async (res, rej) => {
       try {
@@ -43,6 +44,7 @@ class Habit {
             }
         });
     }
+
 
     //   create new habit
     static create(habit, selectedDays, username) {
@@ -63,33 +65,127 @@ class Habit {
     }
 
 
-//  update the frequency of the habit
-  static update(habit, selectedDAys, username){
-      return new Promise(async(res,rej)=>{
-          try {let result = await db.query(
-              SQL`UPDATE habits
+  //  update the frequency of the habit
+  static update(habit, selectedDAys, username) {
+    return new Promise(async (res, rej) => {
+      try {
+        let result = await db.query(
+          SQL`UPDATE habit 
+          SET selectedDays = ${selectedDAys} 
+          WHERE username = ${username} AND habit = ${habit};`
+        );
+        res(result);
+      } catch (error) {
+        rej(`Error udating habit: ${error}`);
+      }
+    });
+  }
 
-              SET selectedDays = ${selectedDAys}
-              WHERE username = ${username} AND habit = ${habit};`);
-                res(result)
-            } catch (error) {
-                rej(`Error udating habit: ${error}`);
-            }
-        })
-    }
+  delete(habit, username) {
+    return new Promise(async (res, rej) => {
+      try {
+        let result = await db.query(
+          SQL`DELETE FROM ${habit} 
+          WHERE username = ${username};`
+        );
+        res(`${habit} is removed from your list!`);
+      } catch (error) {
+        rej(`Error removing ${habit} from your list`);
+      }
+    });
+  }
 
-    delete(habit, username) {
-        return new Promise(async(res, rej) => {
-            try {
-                let result = await db.query(
-                    SQL `DELETE FROM ${habit} 
-                  WHERE username = ${username};`)
-                res(`${habit} is removed from your list!`)
-            } catch (error) {
-                rej(`Error removing ${habit} from your list`)
-            }
-        })
-    }
+  //  Check HabitId with username and habit for updating the track databse when user to checkin
+  static checkHabitId(habit, username) {
+    return new Promise(async (res, rej) => {
+      try {
+        let targetHabitId = await db.query(
+          SQL`SELECT habitId FROM habits 
+            WHERE habit = ${habit} AND username = ${username};`
+        );
+        res(targetHabitId);
+      } catch (error) {
+        rej(`Error finding habit Id: ${error}`);
+      }
+    });
+  }
+
+  //   Check the date difference for updating the streak when user checkin
+  static checkDateDiff(habit, username) {
+    return new Promise(async (res, rej) => {
+      try {
+        let habitId = this.checkHabitId(habit, username);
+        let dateDiff = await db.query(
+          SQL`SELECT DATEDIFF
+          (day, (SELECT MAX(date) FROM track 
+          WHERE habitId = ${habitId}), 
+          GETDATE());`
+        );
+        res(dateDiff);
+      } catch (error) {
+        rej(`Error checking DateDiff: ${error}`);
+      }
+    });
+  }
+
+  static checkWeekdayDiff(habit, username) {
+    return new Promise(async (res, rej) => {
+      try {
+        let selectedDays = await db.query(
+          SQL`SELECT selectedDays FROM habits 
+          WHERE habit = ${habit} AND username = ${username};`
+        );
+        let dayDiffArr = [];
+        for (let day of selectedDays) {
+          dayDiffArr.push(
+            Math.abs(day - selectedDays[selectedDays.indexOf(day) + 1])
+          );
+        }
+        res(dayDiffArr);
+      } catch (error) {
+        rej(`Error checking sleceted weekdays: ${error}`);
+      }
+    });
+  }
+
+  //   The algo that updates the latest streak
+  static calculateStreak(habit, username) {
+    return new Promise(async (res, rej) => {
+      try {
+        let dateDiff = this.checkDateDiff(habit, username);
+        let dayDiffArr = this.checkWeekdayDiff(habit, username);
+        if (dateDiff > 7 || !dateDiff || !dayDiffArr.includes(dateDiff)) {
+          let streak = 1;
+        } else {
+          let streak = await db.query(
+            SQL`SELECT streak FROM 
+            (SELECT streak, MAX(date) FROM track);`
+          );
+          streak++;
+        }
+        res(streak);
+      } catch (error) {
+        rej(`Error calculating streak: ${error}`);
+      }
+    });
+  }
+
+  //   User checkin function
+  static checkin(habit, username) {
+    return new Promise(async (res, rej) => {
+      try {
+        let habitId = this.checkHabitId(habit, username);
+        let streak = this.calculateStreak(habit, username);
+        let checkInResult =
+          await db.query(SQL`INSERT INTO track(habitId, streak, date) 
+          VALUE (${habitId}, ${streak}, GETDATE();`);
+        res(checkInResult);
+      } catch (error) {
+        rej(`Error chacking in: ${error}`);
+      }
+    });
+  }
+
 }
 
 module.exports = Habit;

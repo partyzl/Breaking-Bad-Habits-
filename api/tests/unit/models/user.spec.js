@@ -26,7 +26,9 @@ describe('User', () => {
             const result = await User.findByUserName("testy")
             expect(result.username).toEqual(user.username)
         })
-    })
+
+    });
+
 
     describe('create', () => {
         test('creates new user', async() => {
@@ -40,7 +42,8 @@ describe('User', () => {
             const result = await User.create(user)
             expect(result).toHaveProperty('username');
         })
-    })
+
+    });
 
     describe('getAll', () => {
         test('returns all users eventho I dont want to irl', async () => {
@@ -52,4 +55,5 @@ describe('User', () => {
             expect(all.length).toEqual(5)
         })
     })
+
 })

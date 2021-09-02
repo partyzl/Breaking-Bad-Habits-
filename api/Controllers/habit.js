@@ -5,6 +5,8 @@ const router = require("express").Router();
 const User = require("../Models/user");
 const Habit = require("../Models/habit");
 const { route } = require("./auth");
+const res = require("express/lib/response");
+const { checkin } = require("../Models/habit");
 
 //Read all habits for user
 router.get("/", async (req, res) => {
@@ -41,8 +43,7 @@ router.post("/", async (req, res) => {
 });
 
 //Update frequency of the habit
-
-router.put("/", async (req, res) => {
+router.patch("/", async (req, res) => {
   try {
     const updateHabit = await Habit.update(
       req.body.habit,
@@ -56,7 +57,6 @@ router.put("/", async (req, res) => {
 });
 
 //Delete habit
-
 router.delete("/", async (req, res) => {
   try {
     let targetHabit = Habit.findById(req.params.habitId);
@@ -64,6 +64,16 @@ router.delete("/", async (req, res) => {
     res.status(200).end();
   } catch (error) {
     res.status(404).json({error});
+  }
+});
+
+//Checkin habit
+router.post("/checkin/:id", async (req, res) => {
+  try {
+    let checkinReq = await Habit.checkin(req.body.habit, req.body.username);
+    res.status(200).send(checkinReq);
+  } catch (error) {
+    res.status(422).send(error);
   }
 });
 
