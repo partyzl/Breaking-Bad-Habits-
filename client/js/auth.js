@@ -1,9 +1,7 @@
-const jwt_decode = require('jwt-decode');
+
 // import getHabits from "./requests";
 // import API_URL from "./url";
-const API_URL = window.location.hostname.includes('localhost')
-	? 'http://localhost:3000'
-	: 'https://habitual-lap2-app.herokuapp.com';
+const API_URL = "http://localhost:3000"
 
 
 function loginSubmit(event) {
@@ -49,36 +47,40 @@ function registerSubmit(event) {
     }
   }
   
-  async function requestLogin(data) {
-  //  e.preventDefault();
-    
+  async function requestLogin(e) {
+    e.preventDefault();
+    const username = document.getElementById("emailInput").value
+    const password = document.getElementById("passwordInput").value
+    console.log(e.target);
     try {
       //let formData = new FormData(e.target);
       const options = {
         method: "POST",
-        headers: { "Content-Type": "application/json"},
-        body: JSON.stringify(data)
+        headers: { "Content-Type": "application/json"
+                 },
+        body: JSON.stringify({
+          username, password
+        })
       };
       
       const r = await fetch(`${API_URL}/auth/login`, options);
-      const rJson = await r.json();
-      if (!rJson.success) {
+      const data = await r.json();
+      if (!data.success) {
         throw new Error("Login not authorised");
       }
-      login(rJson.token);
+      login(data.token, data.username);
     } catch (err) {
       console.warn(err);
     }
   }
   
-  function login(token) {
-    const user = jwt_decode(token);
+  function login(token, user) {
     localStorage.setItem("token", token);
     //localStorage.setItem("email", user.email);
-    localStorage.setItem("username", user.username);
+    localStorage.setItem("username", user);
     
-    const landing = document.getElementById("landing");
-    landing.className = "hide-page";
+    // const landing = document.getElementById("landing");
+    // landing.className = "hide-page";
     const habit = document.getElementById("habit-page");
     habit.className = "";
     document.getElementById("register").style.display = "none";

@@ -24,7 +24,7 @@ router.post('/register', async (req, res) => {
 //header, payload, signature
 router.post('/login', async (req, res) => { //jwt token persistence method
     try {
-        let user = await User.findByUserName(req.body.email); //find the user by username
+        let user = await User.findByUserName(req.body.username); //find the user by username
         if(!user){ //check if the user exists
             throw new Error('User does not exist')
         }
@@ -42,6 +42,7 @@ router.post('/login', async (req, res) => { //jwt token persistence method
                 .json({
                     success: true,
                     token: "Bearer "+ token,
+                    username: user.username
                 })
             }
             jwt.sign(payload, process.env.SECRET, {
