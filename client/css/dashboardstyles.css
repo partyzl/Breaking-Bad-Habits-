@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
 
 body {
-    display: flex;
-    margin-top: 50px;
-    justify-content: center;
-  }
+  display: flex;
+  margin-top: 50px;
+  justify-content: center;
+}
 
 /*--------------------------------------------------------------
 # Hero
@@ -20,13 +20,13 @@ body {
   background: url("./images/wave-haikei.svg");
   background-repeat: no-repeat;
   background-position: top;
-  background-size: cover; 
-} 
+  background-size: cover;
+}
 
 #hero h1 {
   margin: 0;
   margin-bottom: 1em;
-  font-family: 'Quicksand', sans-serif; 
+  font-family: "Quicksand", sans-serif;
   font-size: 64px;
   text-align: center;
   color: #45505b;
@@ -36,148 +36,150 @@ body {
 # Calendar
 --------------------------------------------------------------*/
 
-  button {
-    width: 75px;
-    cursor: pointer;
-    box-shadow: 0px 0px 2px gray;
-    border: none;
-    outline: none;
-    padding: 5px;
-    border-radius: 5px;
-    color: white;
-  }
-  
-  #calendar-header {
-    padding: 10px;
-    color: #d36c6c;
-    font-size: 26px;
-    font-family: 'Quicksand', sans-serif; 
-    display: flex;
-    justify-content: space-between;
-  }
+button {
+  width: 75px;
+  cursor: pointer;
+  box-shadow: 0px 0px 2px gray;
+  border: none;
+  outline: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+}
 
-  #calendar-header button {
-    background-color:#92a1d1;
-  }
+#calendar-header {
+  padding: 10px;
+  color: #d36c6c;
+  font-size: 26px;
+  font-family: "Quicksand", sans-serif;
+  display: flex;
+  justify-content: space-between;
+}
 
-  #calendar-container {
-    width: 770px;
-  }
+#calendar-header button {
+  background-color: #92a1d1;
+}
 
-  #weekdays {
-    width: 100%;
-    display: flex;
-    color: #247BA0;
-  }
+#calendar-container {
+  width: 770px;
+}
 
-  #weekdays div {
-    width: 100px;
-    padding: 10px;
-  }
+#weekdays {
+  width: 100%;
+  display: flex;
+  color: #247ba0;
+}
 
-  #calendar {
-    width: 100%;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-  }
+#weekdays div {
+  width: 100px;
+  padding: 10px;
+}
 
-  .day {
-    font-family: 'Quicksand', sans-serif; 
-    width: 100px;
-    padding: 10px;
-    height: 100px;
-    cursor: pointer;
-    box-sizing: border-box;
-    background-color: white;
-    margin: 5px;
-    box-shadow: 0px 0px 3px #CBD4C2;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+#calendar {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
 
-  .day:hover {
-    background-color: #e8faed;
-  }
-  
-  .day + #currentDay {
-    background-color:#e8f4fa;
-  }
+.day {
+  font-family: "Quicksand", sans-serif;
+  width: 100px;
+  padding: 10px;
+  height: 100px;
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: white;
+  margin: 5px;
+  box-shadow: 0px 0px 3px #cbd4c2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-  .event {
-    font-family: 'Quicksand', sans-serif; 
-    font-size: 10px;
-    padding: 3px;
-    background-color: #58bae4;
-    color: white;
-    border-radius: 5px;
-    max-height: 55px;
-    overflow: hidden;
-  }
+.day:hover {
+  background-color: #e8faed;
+}
 
-  .padding {
-    cursor: default !important;
-    background-color: #FFFCFF !important;
-    box-shadow: none !important;
-  }
+.day + #currentDay {
+  background-color: #e8f4fa;
+}
 
-  #newEventModal, #deleteEventModal {
-    font-family: 'Quicksand', sans-serif !important;
-    display: none;
-    z-index: 20;
-    padding: 25px !important;
-    background-color: #e8f4fa;
-    box-shadow: 0px 0px 3px black;
-    border-radius: 5px;
-    width: 350px;
-    top: 100px;
-    left: calc(50% - 175px);
-    position: absolute;
-    font-family: sans-serif;
-  }
+.event {
+  font-family: "Quicksand", sans-serif;
+  font-size: 10px;
+  padding: 3px;
+  background-color: #58bae4;
+  color: white;
+  border-radius: 5px;
+  max-height: 55px;
+  overflow: hidden;
+}
 
-  #eventTitleInput {
-    font-family: 'Quicksand', sans-serif; 
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 25px;
-    border-radius: 3px;
-    outline: none;
-    border: none;
-    box-shadow: 0px 0px 3px gray;
-  }
+.padding {
+  cursor: default !important;
+  background-color: #fffcff !important;
+  box-shadow: none !important;
+}
 
-  #eventTitleInput.error {
-    border: 2px solid red;
-  }
+#newEventModal,
+#deleteEventModal {
+  font-family: "Quicksand", sans-serif !important;
+  display: none;
+  z-index: 20;
+  padding: 25px !important;
+  background-color: #e8f4fa;
+  box-shadow: 0px 0px 3px black;
+  border-radius: 5px;
+  width: 350px;
+  top: 100px;
+  left: calc(50% - 175px);
+  position: absolute;
+  font-family: sans-serif;
+}
 
-  #cancelButton, #deleteButton {
-    font-family: 'Quicksand', sans-serif; 
-    background-color: #d36c6c;
-  }
+#eventTitleInput {
+  font-family: "Quicksand", sans-serif;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 25px;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  box-shadow: 0px 0px 3px gray;
+}
 
-  #saveButton, #closeButton {
-    background-color: #92a1d1;
-  }
+#eventTitleInput.error {
+  border: 2px solid red;
+}
 
-  #eventText {
-    font-family: 'Quicksand', sans-serif; 
-    font-size: 14px;
-  }
+#cancelButton,
+#deleteButton {
+  font-family: "Quicksand", sans-serif;
+  background-color: #d36c6c;
+}
 
-  #modalBackDrop {
-    display: none;
-    top: 0px;
-    left: 0px;
-    z-index: 10;
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    background-color: rgba(0,0,0,0.8);
-  }
-  
+#saveButton,
+#closeButton {
+  background-color: #92a1d1;
+}
+
+#eventText {
+  font-family: "Quicksand", sans-serif;
+  font-size: 14px;
+}
+
+#modalBackDrop {
+  display: none;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+}
 
 /*--------------------------------------------------------------
 # Header
@@ -214,6 +216,9 @@ body {
 /**
 * Desktop Navigation 
 */
+#navbar {
+  border-style: none;
+}
 .nav-menu {
   padding: 0;
   display: block;
@@ -230,7 +235,8 @@ body {
   white-space: nowrap;
 }
 
-.nav-menu a, .nav-menu a:focus {
+.nav-menu a,
+.nav-menu a:focus {
   display: flex;
   align-items: center;
   color: #ffffff;
@@ -250,36 +256,47 @@ body {
   font-size: 20px;
 }
 
-.nav-menu a span, .nav-menu a:focus span {
+.nav-menu a span,
+.nav-menu a:focus span {
   padding: 0 7px 0 7px;
   color: #45505b;
 }
 
 @media (min-width: 992px) {
-  .nav-menu a, .nav-menu a:focus {
+  .nav-menu a,
+  .nav-menu a:focus {
     width: 56px;
   }
-  .nav-menu a span, .nav-menu a:focus span {
+  .nav-menu a span,
+  .nav-menu a:focus span {
     display: none;
     color: #fff;
   }
 }
 
-.nav-menu a:hover, .nav-menu .active, .nav-menu .active:focus, .nav-menu li:hover > a {
+.nav-menu a:hover,
+.nav-menu .active,
+.nav-menu .active:focus,
+.nav-menu li:hover > a {
   color: #fff;
   background: #0563bb;
 }
 
-.nav-menu a:hover span, .nav-menu .active span, .nav-menu .active:focus span, .nav-menu li:hover > a span {
+.nav-menu a:hover span,
+.nav-menu .active span,
+.nav-menu .active:focus span,
+.nav-menu li:hover > a span {
   color: #fff;
 }
 
-.nav-menu a:hover, .nav-menu li:hover > a {
+.nav-menu a:hover,
+.nav-menu li:hover > a {
   width: 100%;
   color: #fff;
 }
 
-.nav-menu a:hover span, .nav-menu li:hover > a span {
+.nav-menu a:hover span,
+.nav-menu li:hover > a span {
   display: block;
 }
 
@@ -304,7 +321,6 @@ body {
 
 .mobile-nav-toggle i {
   color: #45505b;
-  
 }
 
 .mobile-nav-active {
