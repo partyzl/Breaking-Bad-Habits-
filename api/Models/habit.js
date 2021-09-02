@@ -10,12 +10,13 @@ class Habit {
         this.selectedDays = data.selectedDays;
     }
 
-    //  Get all habits of the user
-    static sortByUserName(username) {
-        return new Promise(async(res, rej) => {
-            try {
-                let result = await db.query(
-                    SQL `SELECT habit, selectedDays FROM habit 
+//  Get all habits of the user
+  static sortByUserName(username){
+      return new Promise (async(res,rej)=>{
+          try {
+              let result = await db.query(
+                  SQL`SELECT habit, selectedDays FROM habits 
+
                   WHERE username = ${username};`);
                 let habits = result.rows.map((r) => new Habit(r));
                 res(habits);
@@ -25,12 +26,14 @@ class Habit {
         })
     }
 
-    //   find specific habit by habitId
-    static findById(habitId) {
-        return new Promise(async(res, rej) => {
-            try {
-                let result = await db.query(
-                    SQL `SELECT * FROM habit 
+
+//   find specific habit by habitId
+  static findById(habitId) {
+    return new Promise(async (res, rej) => {
+      try {
+        let result = await db.query(
+          SQL`SELECT * FROM habits 
+
           WHERE habitId = ${habitId};`
                 );
                 let habit = new Habit(result.rows[0]);
@@ -59,12 +62,13 @@ class Habit {
         });
     }
 
-    //  update the frequency of the habit
-    static update(habit, selectedDAys, username) {
-        return new Promise(async(res, rej) => {
-            try {
-                let result = await db.query(
-                    SQL `UPDATE habit
+
+//  update the frequency of the habit
+  static update(habit, selectedDAys, username){
+      return new Promise(async(res,rej)=>{
+          try {let result = await db.query(
+              SQL`UPDATE habits
+
               SET selectedDays = ${selectedDAys}
               WHERE username = ${username} AND habit = ${habit};`);
                 res(result)

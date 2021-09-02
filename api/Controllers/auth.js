@@ -8,23 +8,26 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../Models/user')
 
-router.post('/register', async(req, res) => {
-        try {
-            const salt = await bcrypt.genSalt(); //creates the salt
-            const hashed = await bcrypt.hash(req.body.password, salt) //hashes and salts the pw
-            await User.create({...req.body, password: hashed }) //calls create and adds to your db
-            res.status(201)
-                .json({ message: 'User created!' })
-        } catch (error) {
-            res.status(500)
-                .json({ error })
-        }
-    })
-    //header, payload, signature
-router.post('/login', async(req, res) => { //jwt token persistence method
+
+router.post('/register', async (req, res) => {
     try {
-        let user = await User.findByEmail(req.body.email); //find the user by email
-        if (!user) { //check if the user exists
+        //res.send("Hi")
+        const salt = await bcrypt.genSalt(); //creates the salt
+        const hashed = await bcrypt.hash(req.body.password, salt)//hashes and salts the pw
+        await User.create({...req.body, password: hashed})//calls create and adds to your db
+        res.status(201)
+        .json({message: 'User created!'})
+    } catch (error) {
+        res.status(500)
+        .json({error})
+    }
+})
+//header, payload, signature
+router.post('/login', async (req, res) => { //jwt token persistence method
+    try {
+        let user = await User.findByUserName(req.body.username); //find the user by username
+        if(!user){ //check if the user exists
+
             throw new Error('User does not exist')
         }
         const authed = bcrypt.compare(req.body.password, user.passwordDigest) //compare given pw to our hashed one
@@ -38,10 +41,12 @@ router.post('/login', async(req, res) => { //jwt token persistence method
                     throw new Error(`Error in token generation`)
                 }
                 res.status(200)
-                    .json({
-                        success: true,
-                        token: "Bearer " + token,
-                    })
+
+                .json({
+                    success: true,
+                    token: "Bearer "+ token,
+                    username: user.username
+                })
             }
             jwt.sign(payload, process.env.SECRET, {
                 expiresIn: 3600 //1 hour timelimit from token generation to sign in
