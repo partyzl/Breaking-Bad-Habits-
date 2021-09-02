@@ -2,6 +2,9 @@ const User = require('../../../Models/user');
 const db = require('../../../dbConfig');
 
 const pg = require('pg');
+const { describe } = require('yargs');
+const { test, expect } = require('@jest/globals');
+const { query } = require('express');
 // const { describe } = require('yargs');
 // const { beforeEach, afterAll, test } = require('jest-circus');
 // const { jest, expect } = require('@jest/globals');
@@ -36,6 +39,17 @@ describe('User', () => {
                 .mockResolvedValueOnce({ rows: [user] });
             const result = await User.create(user)
             expect(result).toHaveProperty('username');
+        })
+    })
+
+    describe('getAll', () => {
+        test('returns all users eventho I dont want to irl', async () => {
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({rows: [{}, {}, {}]});
+
+            const all = await User.all;
+
+            expect(all.length).toEqual(5)
         })
     })
 })
