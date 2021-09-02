@@ -47,9 +47,8 @@ class Habit {
     return new Promise(async (res, rej) => {
       try {
         let habitData = await db.query(
-          SQL`INSERT INTO habits (habit, selectedDays) 
-          VALUE (${habit}, ${selectedDays}) 
-          WHERE username = ${username};`
+          SQL`INSERT INTO habits (habit, selectedDays, username) 
+          VALUE (${habit}, ${selectedDays}, ${username});`
         );
 
         let newHabit = new Habit(habitData.rows[0]);
@@ -146,7 +145,7 @@ class Habit {
       try {
         let dateDiff = this.checkDateDiff(habit, username);
         let dayDiffArr = this.checkWeekdayDiff(habit, username);
-        if (dateDiff > 7 || !dayDiffArr.includes(dateDiff)) {
+        if (dateDiff > 7 || !dateDiff || !dayDiffArr.includes(dateDiff)) {
           let streak = 1;
         } else {
           let streak = await db.query(
@@ -158,6 +157,21 @@ class Habit {
         res(streak);
       } catch (error) {
         rej(`Error calculating streak: ${error}`);
+      }
+    });
+  }
+
+  static checkIn(habit, username) {
+    return new Promise(async (res, rej) => {
+      try {
+        let habitId = this.checkHabitId(habit, username);
+        let streak = this.calculateStreak(habit, username);
+        let checkInResult =
+          await db.query(SQL`INSERT INTO track(habitId, streak, date) 
+          VALUE (${habitId}, ${streak}, GETDATE();`);
+        res(checkInResult);
+      } catch (error) {
+        rej(`Error chacking in: ${error}`);
       }
     });
   }
