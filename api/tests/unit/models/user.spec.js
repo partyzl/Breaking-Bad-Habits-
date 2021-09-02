@@ -61,7 +61,6 @@ describe('User', () => {
                 username: 'testy', 
                 email: 'test@testy.com', 
                 password: 'password'};
-
             try {
                 jest.spyOn(db, 'query').mockRejectedValueOnce(Error());
                 await User.create(newUser);
