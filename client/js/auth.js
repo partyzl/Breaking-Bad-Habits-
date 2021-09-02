@@ -1,4 +1,5 @@
 
+
 // import getHabits from "./requests";
 // import API_URL from "./url";
 const API_URL = window.location.hostname.includes('localhost')
@@ -82,7 +83,7 @@ function registerSubmit(event) {
 
     window.location.assign("dashboard.html");
     //getHabits();
-}
+  }
 
 // function logout() {
   //   localStorage.clear();
@@ -90,11 +91,12 @@ function registerSubmit(event) {
   // }
   
 function currentUser() {
-  const username = localStorage.getItem("username");
-  return username;
+    const username = localStorage.getItem("username");
+    return username;
 }
 
 const loginForm = document.getElementById("loginForm");
+
 loginForm.addEventListener("submit", requestLogin);
   
   // module.exports = {
@@ -106,3 +108,4 @@ loginForm.addEventListener("submit", requestLogin);
   //   login,
   // };
   
+
