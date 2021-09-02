@@ -5,8 +5,8 @@ let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('e
 const calendar = document.getElementById('calendar');
 const newEventModal = document.getElementById('newEventModal');
 const deleteEventModal = document.getElementById('deleteEventModal');
-const backDrop = document.getElementById('modalBackDrop');
-const eventTitleInput = document.getElementById('eventTitleInput');
+//const backDrop = document.getElementById('modalBackDrop');
+const habitInput = document.getElementById('habitInput');
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 function openModal(date) {
@@ -21,7 +21,7 @@ function openModal(date) {
     newEventModal.style.display = 'block';
   }
 
-  backDrop.style.display = 'block';
+  //backDrop.style.display = 'block';
 }
 
 function load() {
@@ -82,28 +82,28 @@ function load() {
 }
 
 function closeModal() {
-  eventTitleInput.classList.remove('error');
+  habitInput.classList.remove('error');
   newEventModal.style.display = 'none';
   deleteEventModal.style.display = 'none';
-  backDrop.style.display = 'none';
-  eventTitleInput.value = '';
+  //backDrop.style.display = 'none';
+  habitInput.value = '';
   clicked = null;
   load();
 }
 
 function saveEvent() {
-  if (eventTitleInput.value) {
-    eventTitleInput.classList.remove('error');
+  if (!!habitInput.value) {
+    habitInput.classList.remove('error');
 
     events.push({
       date: clicked,
-      title: eventTitleInput.value,
+      title: habitInput.value,
     });
 
     localStorage.setItem('events', JSON.stringify(events));
     closeModal();
   } else {
-    eventTitleInput.classList.add('error');
+    habitInput.classList.add('error');
   }
 }
 
