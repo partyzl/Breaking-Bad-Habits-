@@ -1,7 +1,9 @@
-// import jwt_decode from "jwt-decode";
+const jwt_decode = require('jwt-decode');
 // import getHabits from "./requests";
 // import API_URL from "./url";
-const API_URL = "http://localhost:3000"
+const API_URL = window.location.hostname.includes('localhost')
+	? 'http://localhost:3000'
+	: 'https://habitual-lap2-app.herokuapp.com';
 
 
 function loginSubmit(event) {
