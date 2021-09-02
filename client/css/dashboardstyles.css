@@ -40,6 +40,7 @@ body {
 --------------------------------------------------------------*/
 
  #calendar-container {
+   margin-top: 2em;
   width: 770px;
 } 
 
@@ -55,13 +56,14 @@ body {
 
 #calendar-header button {
   background-color: #92a1d1;
-  width: 75px;
+  width: 100px;
   cursor: pointer;
   box-shadow: 0px 0px 2px gray;
   border: none;
   outline: none;
   padding: 0px;
-  border-radius: 5px;
+  border-radius: 15px;
+  font-size: 20px;
   color: white;
   position: relative;
 }
