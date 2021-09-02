@@ -134,6 +134,27 @@ function initButtons() {
 initButtons();
 load();
 
+let i = 0;
+
+function progress() {
+  if (i === 0) {
+    i = 1;
+    let elem = document.getElementByClass("progress-bar");
+    let width = 1;
+    let id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+        elem.innerHTML = width + "%";
+      }
+    }
+  }
+}
+
 // function generate_year_range(start, end) {
 //     let years = "";
 //     for (let year = start; year <= end; year++) {

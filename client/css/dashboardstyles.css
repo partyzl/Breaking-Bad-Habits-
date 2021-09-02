@@ -341,3 +341,7 @@ body {
   color: #fff;
   background-color: #f1b33e;
 }
+
+.overall-progress-bar {
+  width: 100%;
+}
