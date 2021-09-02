@@ -1,18 +1,46 @@
+const herokuUrl = "https://habitual-lap2.herokuapp.com/"
 // get all habits 
-async function getHabits(user) {
+
+async function getHabits(username) {
     try {
-        const response = await fetch(`http://localhost:3000/${user}`);
-        const data = await response.json();
+        const options = { headers: new Headers({ 'authorization': localStorage.getItem('token') }) }
+        const response = await fetch(`${herokuUrl}/user/${username}`, options);
+              const data = await response.json();
         return data;
     } catch (err) {
         console.warn(err);
     }
 }
 
-// get specific habit 
-async function getOneHabit(user, habitId) {
+
+
+
+async function getUsers() {
     try {
-        const response = await fetch(`http://localhost:3000/${user}/${habitId}`);
+        const options = { headers: new Headers({ 'authorization': localStorage.getItem('token') }) }
+        console.log("got here")
+        const response = await fetch('http://localhost:3000/user', options);
+        console.log("and here")
+        const data = await response.json();
+        if (data.err) {
+            console.warn(data.err);
+            //logout();
+        }
+        console.log("and also here")
+        return data;
+    } catch (err) {
+        console.warn(err);
+    }
+}
+
+
+
+// get specific habit 
+async function getOneHabit(username, habitId) {
+    try {
+
+        const response = await fetch(`http://localhost:3000/user/${username}/${habitId}`);
+
         const data = await response.json();
         return data;
     } catch (err) {
@@ -21,9 +49,11 @@ async function getOneHabit(user, habitId) {
 }
 
 // see streak for one habit
-async function seeStreaks(user, habitId) {
+async function seeStreaks(username, habitId) {
     try {
-        const response = await fetch(`http://localhost:3000/${user}/${habitId}`);
+
+        const response = await fetch(`http://localhost:3000/user/${username}/${habitId}`);
+
         const data = await response.json();
         return data;
     } catch (err) {
@@ -31,9 +61,11 @@ async function seeStreaks(user, habitId) {
     }
 }
 
-async function seeAllStreaks(user) {
+async function seeAllStreaks(username) {
     try {
-        const response = await fetch(`http://localhost:3000/${user}`);
+
+        const response = await fetch(`http://localhost:3000/user/${username}`);
+
         const data = await response.json();
         return data;
     } catch (err) {
@@ -50,7 +82,9 @@ async function postHabit(e, user) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
         }
-        const response = await fetch(`http://localhost:3000/${user}`, options);
+
+        const response = await fetch(`http://localhost:3000/user/${username}/habits`, options);
+
         const newHabit = await response.json();
         return (newHabit);
     } catch (err) {
@@ -96,5 +130,6 @@ module.exports = {
     postHabit,
     updateHabit,
     dangerZone,
-    deleteHabit
+    deleteHabit,
+    getUsers
 }

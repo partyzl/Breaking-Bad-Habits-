@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
     const result = await Habit.sortByUserName(req.username);
     res.status(200).json({ result });
   } catch (error) {
-    res.status.send({ error });
+    res.status.json({ error });
   }
 });
 
@@ -23,9 +23,9 @@ router.get("/:id", async (req, res) => {
   try {
     const id = req.params;
     const result = await Habit.findById(id);
-    res.status(200).send({ result });
+    res.status(200).json({ result });
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).json(error);
   }
 });
 
@@ -36,9 +36,9 @@ router.post("/", async (req, res) => {
       ...req.body,
       username: req.username,
     });
-    res.status(201).send({ newHabit });
+    res.status(201).json({ newHabit });
   } catch (error) {
-    res.status(500).send({ error });
+    res.status(500).json({ error });
   }
 });
 
@@ -50,20 +50,20 @@ router.patch("/", async (req, res) => {
       req.body.selectedDays,
       req.body.username
     );
-    res.status(202).send(updateHabit);
+    res.status(202).json(updateHabit);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).json(error);
   }
 });
 
 //Delete habit
 router.delete("/", async (req, res) => {
   try {
-    let targetHabit = Habit.findById(req.param.habitId);
+    let targetHabit = Habit.findById(req.params.habitId);
     await targetHabit.delete();
     res.status(200).end();
   } catch (error) {
-    res.status(404).send(error);
+    res.status(404).json({error});
   }
 });
 

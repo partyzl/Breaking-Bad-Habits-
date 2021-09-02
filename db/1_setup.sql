@@ -5,10 +5,12 @@ CREATE TABLE IF NOT EXISTS  users (
 );
 
 CREATE TABLE IF NOT EXISTS habits (
-    habitId serial,
+
+    habitId serial UNIQUE,
+
     username varchar(25) NOT NULL,
     habit varchar(100) NOT NULL,
-    selectedDays int[],
+    selectedDays int ARRAY,
     FOREIGN KEY(username) references users(username)
 );
 

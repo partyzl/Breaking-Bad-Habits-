@@ -19,7 +19,7 @@ services:
       - POSTGRES_DB=habit_test
       - POSTGRES_PASSWORD=password
 volumes:
-    test_db:
+  test_db:
 networks: 
-    default:
-      name: habit_test
+  default:
+    name: habit_test
