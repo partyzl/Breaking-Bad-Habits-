@@ -2,11 +2,12 @@ const db = require("../dbConfig");
 const SQL = require("sql-template-strings"); //makes it a cleaner read for the sql queries
 
 class User {
-  constructor(data) {
-    this.username = data.username;
-    this.email = data.email;
-    this.passwordDigest = data.password_digest; //encrypted
-  }
+    constructor(data) {
+        this.username = data.username;
+        this.email = data.email;
+        this.passwordDigest = data.password_digest; //encrypted
+    }
+
 
   static get all() {
     return new Promise(async (res, rej) => {

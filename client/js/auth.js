@@ -1,4 +1,5 @@
 
+
 // import getHabits from "./requests";
 // import API_URL from "./url";
 const API_URL = "http://localhost:3000"
@@ -81,15 +82,17 @@ function registerSubmit(event) {
     
     // const landing = document.getElementById("landing");
     // landing.className = "hide-page";
+
     const habit = document.getElementById("habit-page");
     habit.className = "";
     document.getElementById("register").style.display = "none";
     document.getElementById("login").style.display = "none";
     document.querySelector(".header-buttons").style.display = "none";
+
     
     window.location.assign("dashboard.html");
     //getHabits();
-}
+
 
 // function logout() {
   //   localStorage.clear();
@@ -97,11 +100,12 @@ function registerSubmit(event) {
   // }
   
 function currentUser() {
-  const username = localStorage.getItem("username");
-  return username;
+    const username = localStorage.getItem("username");
+    return username;
 }
 
 const loginForm = document.getElementById("loginForm");
+
 loginForm.addEventListener("submit", requestLogin);
   
   // module.exports = {
@@ -113,3 +117,4 @@ loginForm.addEventListener("submit", requestLogin);
   //   login,
   // };
   
+

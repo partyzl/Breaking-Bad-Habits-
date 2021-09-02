@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../Models/user')
 
+
 router.post('/register', async (req, res) => {
     try {
         //res.send("Hi")
@@ -26,19 +27,21 @@ router.post('/login', async (req, res) => { //jwt token persistence method
     try {
         let user = await User.findByUserName(req.body.username); //find the user by username
         if(!user){ //check if the user exists
+
             throw new Error('User does not exist')
         }
         const authed = bcrypt.compare(req.body.password, user.passwordDigest) //compare given pw to our hashed one
-        if(authed){ //once we know the user exists create the token
+        if (authed) { //once we know the user exists create the token
             const payload = {
                 username: user.username,
                 email: user.email
             }
             const sendToken = (err, token) => {
-                if(err){
+                if (err) {
                     throw new Error(`Error in token generation`)
                 }
                 res.status(200)
+
                 .json({
                     success: true,
                     token: "Bearer "+ token,
@@ -46,7 +49,7 @@ router.post('/login', async (req, res) => { //jwt token persistence method
                 })
             }
             jwt.sign(payload, process.env.SECRET, {
-                expiresIn: 3600//1 hour timelimit from token generation to sign in
+                expiresIn: 3600 //1 hour timelimit from token generation to sign in
             }, sendToken); //call this only when token is signed
         } else {
             throw new Error(`User could not be authenticated`)
@@ -54,7 +57,7 @@ router.post('/login', async (req, res) => { //jwt token persistence method
     } catch (error) {
         console.log(error);
         res.status(401)
-        .json({error});
+            .json({ error });
     }
 })
 
