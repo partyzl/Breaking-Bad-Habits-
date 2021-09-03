@@ -6,7 +6,6 @@ const User = require("../Models/user");
 const Habit = require("../Models/habit");
 const { route } = require("./auth");
 const res = require("express/lib/response");
-const { checkin } = require("../Models/habit");
 
 //Read all habits for user
 router.get("/", async (req, res) => {
@@ -63,7 +62,7 @@ router.delete("/", async (req, res) => {
     await targetHabit.delete();
     res.status(200).end();
   } catch (error) {
-    res.status(404).json({error});
+    res.status(404).json({ error });
   }
 });
 
