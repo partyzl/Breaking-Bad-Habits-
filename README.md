@@ -1,16 +1,16 @@
 # The Impression of Persistence
 ---
 
-## Installation
+## Installation to run on your machine
 - Clone or download this repo
 - Open your terminal and navigate to the api folder
 - Run the following to install necessary dependencies
 ```
 npm i
 ```
+- Do the same for the client folder
 ---
-## Usage
-
+- Navigate to index.js in your api folder and set desired port and make same changes to the docker-compose file
 - Ensure you have nothing running with the following script 
 ```
 bash _scripts/teardown.sh
@@ -19,6 +19,9 @@ bash _scripts/teardown.sh
 ```
 bash _scripts/startDev.sh
 ```
+## Installation to run in browser
+- The heroku server is running [here](https://git.heroku.com/habitual-lap2.git)
+- The client is running [here](https://impression-of-persistence.netlify.app/)
 ---
 ## Change Log
 
