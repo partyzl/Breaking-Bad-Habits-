@@ -3,76 +3,74 @@ const SQL = require("sql-template-strings"); //makes it a cleaner read for the s
 const res = require("express/lib/response");
 
 class Habit {
-    constructor(data) {
-        this.username = data.username;
-        this.habitId = data.habitId;
-        this.habit = data.habit;
-        this.selectedDays = data.selectedDays;
-    }
+  constructor(data) {
+    this.username = data.username;
+    this.habitId = data.habitId;
+    this.habit = data.habit;
+    this.selectedDays = data.selectedDays;
+  }
 
-
-//  Get all habits of the user
-  static sortByUserName(username){
-      return new Promise (async(res,rej)=>{
-          try {
-              let result = await db.query(
-                  SQL`SELECT habit, selectedDays FROM habits 
-
-                  WHERE username = ${username};`);
-                let habits = result.rows.map((r) => new Habit(r));
-                res(habits);
-            } catch (error) {
-                rej(`Error finding habits: ${error}`);
-            }
-        })
-    }
-
+  //  Get all habits of the user
+  static sortByUserName(username) {
+    return new Promise(async (res, rej) => {
+      try {
+        let result = await db.query(
+          SQL`SELECT habit, selectedDays FROM habits 
+          WHERE username = $1;`,
+          [username]
+        );
+        let habits = result.rows.map((r) => new Habit(r));
+        res(habits);
+      } catch (error) {
+        rej(`Error finding habits: ${error}`);
+      }
+    });
+  }
 
   //   find specific habit by habitId
   static findById(habitId) {
     return new Promise(async (res, rej) => {
       try {
         let result = await db.query(
-          SQL`SELECT * FROM habits 
+          `SELECT * FROM habits 
+          WHERE habitId = $1;`,
+          [habitId]
+        );
+        let habit = new Habit(result.rows[0]);
+        res(habit);
+      } catch (error) {
+        rej(`Error finding habit: ${error}`);
+      }
+    });
+  }
 
-          WHERE habitId = ${habitId};`
-                );
-                let habit = new Habit(result.rows[0]);
-                res(habit);
-            } catch (error) {
-                rej(`Error finding habit: ${error}`);
-            }
-        });
-    }
-
-
-    //   create new habit
-    static create(habit, selectedDays, username) {
-        return new Promise(async(res, rej) => {
-            try {
-                let habitData = await db.query(
-                    SQL `INSERT INTO habits (habit, selectedDays)
-          VALUE (${habit}, ${selectedDays})
-            WHERE username = ${username};`
-                );
-
-                let newHabit = new Habit(habitData.rows[0]);
-                res(newHabit);
-            } catch (error) {
-                rej(`Error creating new habit: ${error}`);
-            }
-        });
-    }
-
+  //   create new habit
+  static create(habit, selectedDays, username) {
+    return new Promise(async (res, rej) => {
+      try {
+        let habitData = await db.query(
+          `INSERT INTO habits (habit, selectedDays)
+            VALUE ($1, $2) 
+            WHERE username = $3;`,
+          [habit, selectedDays, username]
+        );
+        let newHabit = new Habit(habitData.rows[0]);
+        res(newHabit);
+      } catch (error) {
+        rej(`Error creating new habit: ${error}`);
+      }
+    });
+  }
 
   //  update the frequency of the habit
-  static update(habit, selectedDAys, username) {
+  static update(habit, selectedDays, username) {
     return new Promise(async (res, rej) => {
       try {
         let result = await db.query(
-          SQL`UPDATE habit 
-          SET selectedDays = ${selectedDAys} 
-          WHERE username = ${username} AND habit = ${habit};`
+          `UPDATE habits 
+                SET selectedDays = $1 
+                WHERE username = $2 AND habit = $3;`,
+          [selectedDays, username, habit]
         );
         res(result);
       } catch (error) {
@@ -85,8 +83,9 @@ class Habit {
     return new Promise(async (res, rej) => {
       try {
         let result = await db.query(
-          SQL`DELETE FROM ${habit} 
-          WHERE username = ${username};`
+          `DELETE FROM $1 
+            WHERE username = $2;`,
+          [habit, username]
         );
         res(`${habit} is removed from your list!`);
       } catch (error) {
@@ -100,8 +99,9 @@ class Habit {
     return new Promise(async (res, rej) => {
       try {
         let targetHabitId = await db.query(
-          SQL`SELECT habitId FROM habits 
-            WHERE habit = ${habit} AND username = ${username};`
+          `SELECT habitId FROM habits 
+                    WHERE habit = $1 AND username = $2;`,
+          [habit, username]
         );
         res(targetHabitId);
       } catch (error) {
@@ -110,13 +110,13 @@ class Habit {
     });
   }
 
-  //   Check the date difference for updating the streak when user checkin
+  //   Check the date and days difference for updating the streak when user checkin
   static checkDateDiff(habit, username) {
     return new Promise(async (res, rej) => {
       try {
         let habitId = this.checkHabitId(habit, username);
         let dateDiff = await db.query(
-          SQL`SELECT DATEDIFF
+          `SELECT DATEDIFF
           (day, (SELECT MAX(date) FROM track 
           WHERE habitId = ${habitId}), 
           GETDATE());`
@@ -132,8 +132,9 @@ class Habit {
     return new Promise(async (res, rej) => {
       try {
         let selectedDays = await db.query(
-          SQL`SELECT selectedDays FROM habits 
-          WHERE habit = ${habit} AND username = ${username};`
+          `SELECT selectedDays FROM habits 
+          WHERE habit = $1 AND username = $2;`,
+          [habit, username]
         );
         let dayDiffArr = [];
         for (let day of selectedDays) {
@@ -177,7 +178,7 @@ class Habit {
         let habitId = this.checkHabitId(habit, username);
         let streak = this.calculateStreak(habit, username);
         let checkInResult =
-          await db.query(SQL`INSERT INTO track(habitId, streak, date) 
+          await db.query(`INSERT INTO track(habitId, streak, date) 
           VALUE (${habitId}, ${streak}, GETDATE();`);
         res(checkInResult);
       } catch (error) {
@@ -185,7 +186,6 @@ class Habit {
       }
     });
   }
-
 }
 
 module.exports = Habit;
