@@ -30,7 +30,7 @@ body {
 
 #hero h1 {
   display: flex;
-  align-items: inline;
+  ali: inline;
 
   font-family: "Quicksand", sans-serif;
   font-size: 50px;
@@ -57,6 +57,8 @@ body {
   display: inline-block;
   padding: 5px;
   margin: 5px;
+  margin-top: 100px; !important
+  margin-left: 150px; !important
   cursor: pointer;
 }
 
@@ -120,9 +122,7 @@ body {
   display: flex;
   overflow: scroll;
   flex-direction: row;
-}
-#month-view {
-  display: flex;
+  transform: translateY(-50%);
 }
 
 .month-habit-title-cell {
