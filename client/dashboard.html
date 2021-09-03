@@ -36,9 +36,8 @@
     <!-- NAVBAR -->
     <nav id="navbar" class="navbar nav-menu">
       <ul>
-        <li><a href="#index" class="nav-link scrollto"><i class="ri-home-2-fill"></i></i> <span>Home</span></a></li>
-        <li><a href="#" class="nav-link scrollto" ><i class="ri-add-circle-line"></i> <span>Create New Habit</span></a></li>
-        <li><a href="" class="nav-link scrollto"><i class="ri-logout-circle-line"></i> <span>Log Out</span></a></li>
+        <li><a href="h1" class="nav-link scrollto"><i class="ri-home-2-fill"></i></i> <span>Home</span></a></li>
+        <li><a href="./index.html" class="nav-link scrollto"><i class="ri-logout-circle-line"></i> <span>Log Out</span></a></li>
       </ul>
     </nav>
     <!-- NAVBAR END -->
@@ -55,7 +54,7 @@
   <!-- End Hero -->
 
   <!-- Calendar -->
-<div>
+<div id="month-name">
     
 
   <div>
@@ -78,7 +77,7 @@
         <tbody id="today-table-body"></tbody>
       </table>
     </div>
-  
+  <div id=month-div>
     <div id="month-view" class="view hidden">
       <table class="table">
         <thead id="month-table-head">
@@ -89,6 +88,7 @@
         <tbody id="month-table-body"></tbody>
       </table>
     </div>
+  </div>
 
   </div>
   
@@ -96,7 +96,7 @@
     <form id="form">
       <div class="form-item">
         <input type="text" name="habit-title" id="habit-title-input" required>
-        <label for="habit-title-input" class="label">Your New Habit</label>
+        <label for="habit-title-input" class="label">Create New Habit</label>
       </div>
 
     </form>

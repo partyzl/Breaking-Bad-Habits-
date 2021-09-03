@@ -29,10 +29,13 @@ body {
 }
 
 #hero h1 {
+  display: flex;
+  align-items: inline;
+
   font-family: "Quicksand", sans-serif;
   font-size: 50px;
   text-align: center;
-  margin-top: 1.5em;
+  margin-top: 1em;
   color: #000000;
 }
 
@@ -69,6 +72,8 @@ body {
   margin: 0 auto;
   width: 90%;
   height: auto;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .view {
@@ -78,7 +83,7 @@ body {
 }
 
 #today-view {
-  position: absolute;
+  position: relative;
   top: 0;
 }
 
@@ -109,6 +114,15 @@ body {
   min-width: 250px;
   background: rgb(112, 166, 248);
   color: #ffffff;
+}
+
+#month-div {
+  display: flex;
+  overflow: scroll;
+  flex-direction: row;
+}
+#month-view {
+  display: flex;
 }
 
 .month-habit-title-cell {
@@ -176,7 +190,7 @@ body {
   position: absolute;
 }
 .today-delete {
-  color: rgb(254, 233, 225);
+  color: red;
   right: 5px;
   top: 10px;
 }
