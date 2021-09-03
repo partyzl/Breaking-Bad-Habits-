@@ -11,7 +11,6 @@ function loginSubmit(event) {
 }
 
 function registerSubmit(event) {
-  event.preventDefault();
   const passwordValue = document.getElementById("registerPasswordInput").value;
   const confirmPasswordValue = document.getElementById(
     "confirmPasswordInput"

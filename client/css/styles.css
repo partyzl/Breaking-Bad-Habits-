@@ -49,11 +49,10 @@ h6 {
 }
 
 #hero h2 {
-  font-family: 'Pacifico', sans-serif;
+  font-family: 'Quicksand', sans-serif;
   color: #eee;
   margin-bottom: 30px;
-  font-family: 'Pacifico', sans-serif;
-  font-size: 28px;
+  font-size: 30px;
 }
 
 .btn {
@@ -125,6 +124,7 @@ h6 {
   font-family: 'Quicksand', sans-serif; 
   color: rgb(0, 0, 0);
   margin-bottom: 30px;
+
   font-size: 24px;
 }
 
@@ -246,7 +246,6 @@ h6 {
   margin-top: 2em;
   margin-bottom: 2em;
   text-align: center;
-  color: #ffffff;
 }
 
 .reviews p {
