@@ -20,7 +20,7 @@ bash _scripts/teardown.sh
 bash _scripts/startDev.sh
 ```
 ## To run in browser
-- The heroku server is running [here](https://git.heroku.com/habitual-lap2.git)
+- The heroku server is running [here](https://habitual-lap2.herokuapp.com/)
 - The client is running [here](https://impression-of-persistence.netlify.app/)
 ---
 ## Change Log
