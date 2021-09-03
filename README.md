@@ -1,51 +1,31 @@
-# Breaking-Bad-Habits
+# The illusion of persistence
+---
 
-## Brief
-Your website should have the following functionality for users:
-* Users should be able to login
-* Users should be able to choose a habit they want to track (e.g water, exercise, 8 hours of sleep) and choose the frequency at which they want to track the habit
-* Users should be able to track a habit and mark it as complete for the day
-* Users should be able to see if they have completed a habit for the day and see their most recent completion streak
-* Your project should meet the following technical requirements:
-* Data should be persisted in a database
-* Minimum 60% test coverage with an aim of 80%
-* Your codebase should primarily feature the technologies we have covered so far on the course
+## Installation
+- Clone or download this repo
+- Open your terminal and navigate to the api folder
+- Run the following to install necessary dependencies
+```
+npm i
+```
+---
+## Usage
 
-Challenge: 
-
-## Installation & Usage
-
-### Installation
-
-Clone or download the repo.
-
-
-
-### Usage
-
-
-
+- Ensure you have nothing running with the following script 
+```
+bash _scripts/teardown.sh
+```
+- Run the server with
+```
+bash _scripts/startDev.sh
+```
+---
 ## Change Log
 
-### 
-
-[x] 
-
-### 
-
-[x] 
-
-###
-
-[x] 
-
-### 
-
-[x] 
-
-### 
-
-[x] 
+- Users can register and login
+- User can create habits
+- User can tick off habits daily
+- User can view their daily and monthly success
 
 ## Technologies used
 
