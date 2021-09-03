@@ -93,11 +93,18 @@ Clone or download the repo.
 ## Wins and Challenges
 
 ### Wins
-
-
+  - Dashboard looks amazing
+  - Server works
+  - Kenneths functions
+  - Calendar feature
+  - Auth and Auth
 
 ### Challenges
   
+  - Being in our group there was a 60% chance you were moving house this week
+  - Auth and Auth - but we got it to work in the end
+  - Calendar feature + styling for it
+  - Testing
 </details>
 
 ## Routes
