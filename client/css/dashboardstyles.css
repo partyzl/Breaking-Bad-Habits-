@@ -8,9 +8,10 @@
 body {
   display: flex;
   justify-content: center;
+  color: black;
 }
 
-.container{
+.container {
   display: flex;
   flex-wrap: wrap;
 }
@@ -24,8 +25,8 @@ body {
   background: url("./images/wave-haikei.svg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover; 
-} 
+  background-size: cover;
+}
 
 #hero h1 {
   font-family: "Quicksand", sans-serif;
@@ -39,10 +40,213 @@ body {
 # Calendar
 --------------------------------------------------------------*/
 
- #calendar-container {
-   margin-top: 2em;
+#view-header {
+  padding: 20px;
+  font-family: "Quicksand", sans-serif;
+  text-transform: capitalize;
+  font-weight: lighter;
+  font-size: 50px;
+  color: red;
+}
+
+.view-option {
+  font-family: "Quicksand", sans-serif;
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.selected-view {
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+  border-bottom: 3px solid rgb(0, 247, 255);
+  transition: 0.2s;
+}
+
+.view-container {
+  position: relative;
+  margin: 0 auto;
+  width: 90%;
+  height: auto;
+}
+
+.view {
+  width: 100%;
+  padding-top: 20px;
+  transition: 0.3s ease-out;
+}
+
+#today-view {
+  position: absolute;
+  top: 0;
+}
+
+/* hide table */
+.hidden {
+  transform: scale(0);
+}
+
+.table {
+  margin: 0 auto;
+}
+
+.cell {
+  text-align: center;
+  border-radius: 20%;
+  background: rgb(254, 233, 225);
+  color: rgb(0, 0, 0);
+  font-weight: lighter;
+}
+
+.date-cell {
+  width: 30px;
+  background: rgb(16, 134, 189);
+}
+
+.habits-header-cell {
+  font-family: "Quicksand", sans-serif;
+  min-width: 250px;
+  background: rgb(112, 166, 248);
+  color: #ffffff;
+}
+
+.month-habit-title-cell {
+  height: 30px;
+  background: rgb(16, 134, 189);
+  position: relative;
+}
+
+.today-habit-title-cell {
+  height: 35px;
+  position: relative;
+  color: #000000;
+  background: rgb(16, 134, 189);
+  font-size: 20px;
+  padding: 5px 30px;
+  min-width: 150px;
+}
+
+.daily-cell {
+  cursor: pointer;
+}
+
+.checkbox-cell {
+  text-align: center;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  width: 35px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.highlight {
+  background: rgb(112, 166, 248);
+}
+
+.complete {
+  background: linear-gradient(
+    to bottom right,
+    rgb(191, 250, 194),
+    rgb(56, 207, 64)
+  );
+}
+
+.incomplete {
+  background: linear-gradient(
+    to bottom right,
+    rgb(245, 166, 179),
+    rgb(207, 56, 81)
+  );
+}
+
+.start-date {
+  background: linear-gradient(
+    to bottom right,
+    rgb(55, 0, 255),
+    rgb(0, 183, 255)
+  );
+}
+
+.today-delete,
+.month-delete {
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  position: absolute;
+}
+.today-delete {
+  color: rgb(254, 233, 225);
+  right: 5px;
+  top: 10px;
+}
+.month-delete {
+  color: red;
+  left: 5px;
+  top: 8px;
+}
+
+.form-container {
+  position: relative;
+}
+
+#form {
+  margin: 40px;
+}
+
+.form-item {
+  position: relative;
+  background-color: #fa7268;
+  width: 250px;
+  height: 50px;
+  border-radius: 5px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+#habit-title-input {
+  width: 90%;
+  font-family: "Quicksand", sans-serif;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  padding: 3px;
+  margin: 3px auto;
+  background: "";
+  text-align: center;
+  transition: 0.2s;
+  background-color: #fa7268;
+  text-decoration: none;
+}
+#habit-title-input:focus {
+  margin-top: 12px;
+  border-bottom: 1px solid black;
+}
+
+#habit-title-input:focus + .label {
+  margin-top: -15px;
+  font-size: 12px;
+}
+#habit-title-input:valid + .label {
+  margin-top: -15px;
+  font-size: 12px;
+}
+.label {
+  position: absolute;
+  font-size: 18px;
+  padding: 5px;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  transition: 0.2s;
+  color: black;
+}
+
+#calendar-container {
+  margin-top: 2em;
   width: 770px;
-} 
+}
 
 #calendar-header {
   padding: 10px;
@@ -79,7 +283,7 @@ body {
   width: 100px;
   display: inline-flex;
   /* justify-content: space-between; */
-} 
+}
 
 #calendar {
   width: 100%;
@@ -136,7 +340,7 @@ body {
   display: none;
   z-index: 20;
   padding: 25px !important;
-  background-color: #f3ba9f;
+  background-color: #dbdbdb;
   box-shadow: 0px 0px 10px black;
   border-radius: 5px;
   width: 350px;
@@ -213,11 +417,11 @@ body {
   }
 }
 
- @media (min-width: 992px) {
+@media (min-width: 992px) {
   #main {
     margin-left: 100px;
   }
-} 
+}
 
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -254,7 +458,7 @@ body {
   transition: 0.3s;
   font-size: 15px;
   border-radius: 50px;
-  background: #FA7268;
+  background: #fa7268;
   height: 56px;
   width: 100%;
   overflow: hidden;

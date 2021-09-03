@@ -191,230 +191,402 @@ module.exports = {
   login: login
 };
 
-},{"./requests":6,"./url":7,"jwt-decode":8}],2:[function(require,module,exports){
+},{"./requests":5,"./url":6,"jwt-decode":7}],2:[function(require,module,exports){
 "use strict";
 
-var nav = 0;
-var clicked = null;
-var events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
-var calendar = document.getElementById('calendar');
-var newEventModal = document.getElementById('newEventModal');
-var deleteEventModal = document.getElementById('deleteEventModal');
-var backDrop = document.getElementById('modalBackDrop');
-var eventTitleInput = document.getElementById('eventTitleInput');
-var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+// set up client-side storage 
+var db;
 
-function openModal(date) {
-  clicked = date;
-  var eventForDay = events.find(function (e) {
-    return e.date === clicked;
-  });
+window.onload = function () {
+  var request = window.indexedDB.open('habits', 1); // opens db; creates if not already existing
 
-  if (eventForDay) {
-    document.getElementById('eventText').innerText = eventForDay.title;
-    deleteEventModal.style.display = 'block';
-  } else {
-    newEventModal.style.display = 'block';
-  }
-
-  backDrop.style.display = 'block';
-}
-
-function load() {
-  var dt = new Date();
-
-  if (nav !== 0) {
-    dt.setMonth(new Date().getMonth() + nav);
-  }
-
-  var day = dt.getDate();
-  var month = dt.getMonth();
-  var year = dt.getFullYear();
-  var firstDayOfMonth = new Date(year, month, 1);
-  var daysInMonth = new Date(year, month + 1, 0).getDate();
-  var dateString = firstDayOfMonth.toLocaleDateString('en-us', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric'
-  });
-  var paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
-  document.getElementById('monthDisplay').innerText = "".concat(dt.toLocaleDateString('en-us', {
-    month: 'long'
-  }), " ").concat(year);
-  calendar.innerHTML = '';
-
-  var _loop = function _loop(i) {
-    var daySquare = document.createElement('div');
-    daySquare.classList.add('day');
-    var dayString = "".concat(month + 1, "/").concat(i - paddingDays, "/").concat(year);
-
-    if (i > paddingDays) {
-      daySquare.innerText = i - paddingDays;
-      var eventForDay = events.find(function (e) {
-        return e.date === dayString;
-      });
-
-      if (i - paddingDays === day && nav === 0) {
-        daySquare.id = 'currentDay';
-      }
-
-      if (eventForDay) {
-        var eventDiv = document.createElement('div');
-        eventDiv.classList.add('event');
-        eventDiv.innerText = eventForDay.title;
-        daySquare.appendChild(eventDiv);
-      }
-
-      daySquare.addEventListener('click', function () {
-        return openModal(dayString);
-      });
-    } else {
-      daySquare.classList.add('padding');
-    }
-
-    calendar.appendChild(daySquare);
+  request.onerror = function () {
+    console.log('database failed to open');
   };
 
-  for (var i = 1; i <= paddingDays + daysInMonth; i++) {
-    _loop(i);
-  }
-}
+  request.onsuccess = function () {
+    console.log('database opened successfully');
+    db = request.result; // object representing db
 
-function closeModal() {
-  eventTitleInput.classList.remove('error');
-  newEventModal.style.display = 'none';
-  deleteEventModal.style.display = 'none';
-  backDrop.style.display = 'none';
-  eventTitleInput.value = '';
-  clicked = null;
-  load();
-}
+    displayHabits();
+  }; // runs if db not setup, or is opened with greater version number
 
-function saveEvent() {
-  if (eventTitleInput.value) {
-    eventTitleInput.classList.remove('error');
-    events.push({
-      date: clicked,
-      title: eventTitleInput.value
+
+  request.onupgradeneeded = function (e) {
+    var db = e.target.result; // equivalent to db = request.result
+    // create single table in db system
+
+    var objectStore = db.createObjectStore('habits', {
+      keyPath: 'id',
+      autoIncrement: true
+    }); // define what data items it will contain
+
+    objectStore.createIndex('title', 'title', {
+      unique: false
     });
-    localStorage.setItem('events', JSON.stringify(events));
-    closeModal();
-  } else {
-    eventTitleInput.classList.add('error');
+    objectStore.createIndex('type', 'type', {
+      unique: false
+    });
+    objectStore.createIndex('history', 'history', {
+      unique: false
+    });
+    objectStore.createIndex('start', 'start', {
+      unique: false
+    });
+    console.log('database setup complete');
+  };
+
+  document.getElementById('form').onsubmit = addHabit;
+}; //****************** VARIABLES *******************//
+// for date header & page header
+
+
+var days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var monthLengths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+var today = new Date();
+var day = today.getDay();
+var date = today.getDate();
+var month = today.getMonth();
+var year = today.getFullYear(); // Getting week number
+// function getWeek() {
+//   const today = new Date();
+//   const firstDayOfYear = new Date(today.getFullYear(), 0, 1);
+//   const pastDaysOfYear = (today - firstDayOfYear) / 86400000;
+//   return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+//   }
+// const week = today.getWeek();
+// for matching Date.getDateString() output, used for storing responses
+
+var days2 = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+var daysFull = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+var months2 = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; //****************** VIEW *******************//
+
+var todayHeader = "".concat(daysFull[day].toLowerCase(), ", ").concat(months[month].toLowerCase(), " ").concat(date, ", ").concat(year); // const weekHeader = `Week ${week}, ${months[month]}, ${year}`;
+
+var monthHeader = "".concat(months[month], " ").concat(year);
+var currentView = 'today';
+document.getElementById('view-header').textContent = todayHeader;
+
+var toggleView = function toggleView() {
+  // document.getElementById('view-header').textContent = currentView === 'today' ? todayHeader : weekHeader : monthHeader;
+  document.getElementById('view-header').textContent = currentView === 'today' ? todayHeader : monthHeader;
+  document.querySelectorAll('.view-option').forEach(function (viewoption) {
+    return viewoption.classList.toggle('selected-view');
+  });
+  document.getElementById('today-view').classList.toggle('hidden'); // document.getElementById('week-view').classList.toggle('hidden');
+
+  document.getElementById('month-view').classList.toggle('hidden');
+};
+
+document.querySelectorAll('.view-option').forEach(function (viewoption) {
+  viewoption.addEventListener('click', function (e) {
+    var selectedView = e.target.id;
+
+    if (selectedView !== currentView) {
+      currentView = selectedView;
+      toggleView();
+    }
+  });
+}); //****************** DISPLAY HABITS *******************//
+
+function displayHabits() {
+  var monthTable = document.getElementById('month-table-body'); // const weekTable = document.getElementById('week-table-body');
+
+  var todayTable = document.getElementById('today-table-body'); // monthTable.innerHTML = weekTable.innerHTML = todayTable.innerHTML = "";
+
+  monthTable.innerHTML = todayTable.innerHTML = ""; // open object store and get cursor (iterates through all data items in store)
+
+  var objectStore = db.transaction('habits').objectStore('habits');
+
+  objectStore.openCursor().onsuccess = function (e) {
+    // get reference to cursor
+    var cursor = e.target.result;
+
+    if (cursor) {
+      var habit = cursor.value; // display month table
+
+      var monthRow = document.createElement('tr');
+      addHabitTitleCell(habit, monthRow, 'month-habit-title-cell', 'month');
+      addDailyCells(habit, monthRow);
+      monthRow.setAttribute('data-habit-id', habit.id);
+      monthTable.appendChild(monthRow); // display week table
+      // let weekRow = document.createElement('tr');
+      // addHabitTitleCell(habit, weekRow, 'week-habit-title-cell', 'week');
+      // addDailyCells(habit, weekRow);
+      // weekRow.setAttribute('data-habit-id', habit.id);
+      // monthTable.appendChild(weekRow);
+      // display today table
+
+      var todayRow = document.createElement('tr');
+      addCheckboxCell(habit, todayRow);
+      addHabitTitleCell(habit, todayRow, 'today-habit-title-cell', 'daily');
+      todayRow.setAttribute("data-habit-id", habit.id);
+      todayTable.appendChild(todayRow); // iterator to next item in cursor
+
+      cursor["continue"]();
+    } else {
+      if (!monthTable.innerHTML) {
+        var _monthRow = document.createElement('tr');
+
+        var cell = document.createElement('td');
+        cell.textContent = "No Habits Yet!";
+        cell.setAttribute('colspan', 40);
+
+        _monthRow.appendChild(cell);
+
+        monthTable.appendChild(_monthRow);
+      } // if (!weekTable.innerHTML) {
+      //   let weekRow = document.createElement('tr');
+      //   let cell = document.createElement('td');
+      //   cell.textContent = `No Habits Yet!`;
+      //   cell.setAttribute('colspan', 40);
+      //   weekRow.appendChild(cell);
+      //   weekTable.appendChild(weekRow);
+      // }
+
+
+      if (!todayTable.innerHTML) {
+        var _todayRow = document.createElement('tr');
+
+        var _cell = document.createElement("td");
+
+        _cell.textContent = "No Habits Yet!";
+
+        _cell.setAttribute("colspan", 40);
+
+        _todayRow.appendChild(_cell);
+
+        todayTable.appendChild(_todayRow);
+      }
+    }
+  };
+}
+
+var addCheckboxCell = function addCheckboxCell(habit, row) {
+  var checkboxCell = document.createElement('td');
+  checkboxCell.classList.add('cell', 'checkbox-cell');
+  var dateKey = "".concat(days2[day], " ").concat(months2[month], " ").concat(date, " ").concat(year);
+  var response = habit.history[dateKey]; // 'complete', 'incomplete', null/undefined
+
+  if (response) {
+    checkboxCell.classList.add(response);
+
+    if (response === "complete") {
+      checkboxCell.innerHTML = '<i class="ri-check-line"></i>';
+    } else if (response === "incomplete") {
+      checkboxCell.innerHTML = '<i class="ri-close-line"></i>';
+    }
   }
-}
 
-function deleteEvent() {
-  events = events.filter(function (e) {
-    return e.date !== clicked;
+  checkboxCell.addEventListener("click", function () {
+    updateHabit(habit.id, dateKey);
   });
-  localStorage.setItem('events', JSON.stringify(events));
-  closeModal();
-}
+  row.appendChild(checkboxCell);
+};
 
-function initButtons() {
-  document.getElementById('nextButton').addEventListener('click', function () {
-    nav++;
-    load();
+var addHabitTitleCell = function addHabitTitleCell(habit, row, classname, type) {
+  var title = document.createElement('td');
+  title.classList.add('cell', classname);
+  title.textContent = habit.title;
+  row.appendChild(title);
+  var deleteButton = document.createElement('button');
+  deleteButton.innerHTML = '<i class="ri-close-circle-line"></i>';
+  deleteButton.addEventListener('click', function () {
+    deleteHabit(habit.id);
   });
-  document.getElementById('backButton').addEventListener('click', function () {
-    nav--;
-    load();
-  });
-  document.getElementById('saveButton').addEventListener('click', saveEvent);
-  document.getElementById('cancelButton').addEventListener('click', closeModal);
-  document.getElementById('deleteButton').addEventListener('click', deleteEvent);
-  document.getElementById('closeButton').addEventListener('click', closeModal);
-}
 
-initButtons();
-load(); // function generate_year_range(start, end) {
-//     let years = "";
-//     for (let year = start; year <= end; year++) {
-//         years += "<option value='" + year + "'>" + year + "</option>";
-//     }
-//     return years;
-//   }
-//   let today = new Date();
-//   let currentMonth = today.getMonth();
-//   let currentYear = today.getFullYear();
-//   let selectYear = document.getElementById("year");
-//   let selectMonth = document.getElementById("month");
-//   let createYear = generate_year_range(1970, 2050);
-//   /** or
-//   * createYear = generate_year_range( 1970, currentYear );
-//   */
-//   document.getElementById("year").innerHTML = createYear;
-//   let calendar = document.getElementById("calendar");
-//   let lang = calendar.getAttribute('data-lang');
-//   let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-//   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-//   let dayHeader = "<tr>";
-//   for (day in days) {
-//     dayHeader += "<th data-days='" + days[day] + "'>" + days[day] + "</th>";
-//   }
-//   dayHeader += "</tr>";
-//   document.getElementById("thead-month").innerHTML = dayHeader;
-//   monthAndYear = document.getElementById("monthAndYear");
-//   showCalendar(currentMonth, currentYear);
-//   function next() {
-//     currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
-//     currentMonth = (currentMonth + 1) % 12;
-//     showCalendar(currentMonth, currentYear);
-//   }
-//   function previous() {
-//     currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
-//     currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
-//     showCalendar(currentMonth, currentYear);
-//   }
-//   function jump() {
-//     currentYear = parseInt(selectYear.value);
-//     currentMonth = parseInt(selectMonth.value);
-//     showCalendar(currentMonth, currentYear);
-//   }
-//   function showCalendar(month, year) {
-//     let firstDay = ( new Date( year, month ) ).getDay();
-//     tbl = document.getElementById("calendar-body");
-//     tbl.innerHTML = "";
-//     monthAndYear.innerHTML = months[month] + " " + year;
-//     selectYear.value = year;
-//     selectMonth.value = month;
-//     // creating all cells
-//     let date = 1;
-//     for ( let i = 0; i < 6; i++ ) {
-//         let row = document.createElement("tr");
-//         for ( let j = 0; j < 7; j++ ) {
-//             if ( i === 0 && j < firstDay ) {
-//                 cell = document.createElement( "td" );
-//                 cellText = document.createTextNode("");
-//                 cell.appendChild(cellText);
-//                 row.appendChild(cell);
-//             } else if (date > daysInMonth(month, year)) {
-//                 break;
-//             } else {
-//                 cell = document.createElement("td");
-//                 cell.setAttribute("data-date", date);
-//                 cell.setAttribute("data-month", month + 1);
-//                 cell.setAttribute("data-year", year);
-//                 cell.setAttribute("data-month_name", months[month]);
-//                 cell.className = "date-picker";
-//                 cell.innerHTML = "<span>" + date + "</span>";
-//                 if ( date === today.getDate() && year === today.getFullYear() && month === today.getMonth() ) {
-//                     cell.className = "date-picker selected";
-//                 }
-//                 row.appendChild(cell);
-//                 date++;
-//             }
-//         }
-//         tbl.appendChild(row);
-//     }
-//   }
+  if (type === 'month') {
+    deleteButton.classList.add('month-delete');
+    title.appendChild(deleteButton);
+  } else {
+    deleteButton.classList.add('today-delete');
+    title.appendChild(deleteButton);
+  }
+
+  return row;
+};
+
+var addDailyCells = function addDailyCells(habit, row) {
+  // for comparing whether day falls after habit start date
+  var habitStart = habit.start;
+  var habitStartNumber = Number("".concat(habitStart.getFullYear()).concat(habitStart.getMonth()).concat(habitStart.getDate()));
+  var currDay = startDay;
+
+  var _loop = function _loop() {
+    var currDate = i;
+    var currDateNumber = Number('' + year + month + i);
+    var dateKey = "".concat(days2[currDay], " ").concat(months2[month], " ").concat(i, " ").concat(year);
+    var cell = document.createElement('td');
+    cell.classList.add('cell', 'daily-cell');
+    var response = habit.history[dateKey]; // 'complete', 'incomplete', null/undefined
+
+    if (currDateNumber === habitStartNumber) {
+      cell.classList.add("start-date");
+    }
+
+    if (response) {
+      cell.classList.add(response);
+
+      if (response === 'complete') {
+        cell.innerHTML = '<i class="ri-check-line"></i>';
+      } else if (response === 'incomplete') {
+        cell.innerHTML = '<i class="ri-close-line"></i>';
+      } // if no response recorded from previous day yet habit was active auto-mark as incomplete
+
+    } else if (currDateNumber >= habitStartNumber) {
+      if (i < date && !response) {
+        response = "incomplete";
+        cell.classList.add("incomplete");
+        cell.innerHTML = '<i class="ri-close-line"></i>';
+      }
+    } // prevent responses being added to future dates
+
+
+    if (i <= date) {
+      cell.addEventListener('click', function () {
+        updateHabit(habit.id, dateKey);
+      });
+    }
+
+    row.appendChild(cell);
+    currDay++;
+
+    if (currDay === 7) {
+      currDay = 0;
+    }
+
+    ;
+  };
+
+  for (i = 1; i <= monthLength; i++) {
+    _loop();
+  }
+}; //****************** ADD HABITS *******************//
+
+
+function addHabit(e) {
+  e.preventDefault();
+  var titleInput = document.getElementById('habit-title-input').value;
+  var typeInput = 'daily';
+  var newHabit = {
+    title: titleInput,
+    type: typeInput,
+    history: {},
+    start: new Date()
+  };
+  var transaction = db.transaction(['habits'], 'readwrite');
+  var objectStore = transaction.objectStore("habits");
+  var request = objectStore.add(newHabit);
+
+  request.onsuccess = function () {
+    document.getElementById('habit-title-input').value = '';
+  };
+
+  transaction.oncomplete = function () {
+    console.log('transaction complete: database modification finished');
+    displayHabits();
+  };
+
+  transaction.onerror = function () {
+    console.log('transaction not opened due to error');
+  };
+} //****************** UPDATE HABITS *******************//
+
+
+function updateHabit(habitId, dateKey) {
+  var objectStore = db.transaction(['habits'], 'readwrite').objectStore('habits');
+  var objectStoreHabitRequest = objectStore.get(habitId);
+
+  objectStoreHabitRequest.onsuccess = function () {
+    var habit = objectStoreHabitRequest.result;
+    var currResponse = habit.history[dateKey];
+    var newResponse;
+
+    if (currResponse === 'complete') {
+      newResponse = 'incomplete';
+    } else if (currResponse === 'incomplete') {
+      newResponse = null;
+    } else {
+      newResponse = 'complete';
+    }
+
+    habit.history[dateKey] = newResponse;
+    console.log(habit);
+    var updateHabitRequest = objectStore.put(habit);
+
+    updateHabitRequest.onsuccess = function () {
+      displayHabits();
+      console.log('habit response saved');
+    };
+  };
+} //****************** DELETE HABITS *******************//
+
+
+function deleteHabit(habitId) {
+  var deleteRequest = db.transaction(['habits'], 'readwrite').objectStore('habits')["delete"](habitId);
+
+  deleteRequest.onsuccess = function () {
+    console.log('habit successfully deleted');
+    displayHabits();
+  };
+} //****************** DISPLAY DATE HEADERS *******************//
+
+
+var getMonthStartDay = function getMonthStartDay() {
+  var currDate = today.getDate();
+  var currDay = today.getDay();
+  var startDay = 0;
+  var dayCount = currDay;
+
+  for (var dateCount = currDate; dateCount > 0; dateCount--) {
+    if (dayCount === -1) {
+      dayCount = 6;
+    }
+
+    if (dateCount === 1) {
+      startDay = dayCount;
+    }
+
+    dayCount--;
+  }
+
+  return startDay;
+};
+
+var dateHeaderRow = document.getElementById("date-header-row");
+var startDay = getMonthStartDay();
+var monthLength = monthLengths[month];
+
+var addDayAndDateCells = function addDayAndDateCells() {
+  // add date cells
+  for (var _i = 1; _i <= monthLength; _i++) {
+    var cell = document.createElement("td");
+    cell.classList.add("cell", "date-cell");
+    cell.textContent = _i;
+
+    if (_i === date) {
+      cell.classList.add("highlight");
+    }
+
+    dateHeaderRow.appendChild(cell);
+  } // add days above dates
+
+
+  var allDateCells = document.querySelectorAll(".date-cell");
+
+  for (var _i2 = 0; _i2 < allDateCells.length; _i2++) {
+    var _day = document.createElement("div");
+
+    _day.textContent = days[_i2 % 7];
+
+    allDateCells[_i2].prepend(_day);
+  }
+};
+
+addDayAndDateCells();
 
 },{}],3:[function(require,module,exports){
-"use strict";
-
-},{}],4:[function(require,module,exports){
 // const API_URL = require('./url');
 // async function renderHabits(data) {
 //   const feed = document.getElementById('habit-list');
@@ -521,7 +693,7 @@ load(); // function generate_year_range(start, end) {
 // module.exports = {renderHabits, updateStreak};
 "use strict";
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 "use strict";
 
 var _require = require('./auth'),
@@ -541,7 +713,7 @@ registerForm.addEventListener('submit', requestRegistration);
 habitForm.addEventListener('submit', postHabit);
 signOutButton.addEventListener('click', logout);
 
-},{"./auth":1,"./requests":6}],6:[function(require,module,exports){
+},{"./auth":1,"./requests":5}],5:[function(require,module,exports){
 "use strict";
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -861,13 +1033,13 @@ module.exports = {
   deleteHabit: deleteHabit
 };
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
 module.exports = 'http://localhost:3000';
 
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";function e(e){this.message=e}e.prototype=new Error,e.prototype.name="InvalidCharacterError";var r="undefined"!=typeof window&&window.atob&&window.atob.bind(window)||function(r){var t=String(r).replace(/=+$/,"");if(t.length%4==1)throw new e("'atob' failed: The string to be decoded is not correctly encoded.");for(var n,o,a=0,i=0,c="";o=t.charAt(i++);~o&&(n=a%4?64*n+o:o,a++%4)?c+=String.fromCharCode(255&n>>(-2*a&6)):0)o="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(o);return c};function t(e){var t=e.replace(/-/g,"+").replace(/_/g,"/");switch(t.length%4){case 0:break;case 2:t+="==";break;case 3:t+="=";break;default:throw"Illegal base64url string!"}try{return function(e){return decodeURIComponent(r(e).replace(/(.)/g,(function(e,r){var t=r.charCodeAt(0).toString(16).toUpperCase();return t.length<2&&(t="0"+t),"%"+t})))}(t)}catch(e){return r(t)}}function n(e){this.message=e}function o(e,r){if("string"!=typeof e)throw new n("Invalid token specified");var o=!0===(r=r||{}).header?0:1;try{return JSON.parse(t(e.split(".")[o]))}catch(e){throw new n("Invalid token specified: "+e.message)}}n.prototype=new Error,n.prototype.name="InvalidTokenError";const a=o;a.default=o,a.InvalidTokenError=n,module.exports=a;
 
 
-},{}]},{},[1,2,3,4,5,6,7]);
+},{}]},{},[1,2,3,4,5,6]);

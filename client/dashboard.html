@@ -23,7 +23,7 @@
       rel="stylesheet">
 
     <!-- Local CSS Files -->
-    <link rel="stylesheet" href="./css/dashboardstyles.css">
+    <link rel="stylesheet" href="/client/css/dashboardstyles.css">
 
     <script defer src="./js/calendar.js"></script>
 
@@ -38,8 +38,6 @@
       <ul>
         <li><a href="#index" class="nav-link scrollto"><i class="ri-home-2-fill"></i></i> <span>Home</span></a></li>
         <li><a href="#" class="nav-link scrollto" ><i class="ri-add-circle-line"></i> <span>Create New Habit</span></a></li>
-        <li><a href="#stats" class="nav-link scrollto"><i class="ri-donut-chart-fill"></i> <span>Streaks and Stats</span></a></li>
-        <li><a href="#settings" class="nav-link scrollto"><i class="ri-settings-3-fill"></i> <span>Settings</span></a></li>
         <li><a href="" class="nav-link scrollto"><i class="ri-logout-circle-line"></i> <span>Log Out</span></a></li>
       </ul>
     </nav>
@@ -54,8 +52,163 @@
     <div>
       <h1>Welcome to your Dashboard!</h1>
     </div>
+  <!-- End Hero -->
 
-    <div id="calendar-container">
+  <!-- Calendar -->
+<div>
+    <div class="view-option selected-view" id="today">Today</div>
+    <!-- <div class="view-option" id="week">Week</div> -->
+    <div class="view-option" id="month">Month</div>
+  </div>
+
+  <div>
+    <h1 id="view-header"></h1>
+  </div>
+
+  <div class="view-container">
+
+    <div id="today-view" class="view">
+      <table class="table">
+        <thead id="today-table-head">
+          <tr id="today-header-row">
+            <th id="today-header-cell" colspan="5"></th>
+          </tr>
+        </thead>
+        <tbody id="today-table-body"></tbody>
+      </table>
+    </div>
+  
+    <div id="month-view" class="view hidden">
+      <table class="table">
+        <thead id="month-table-head">
+          <tr id="date-header-row">
+            <th class="habits-header-cell cell">Your Habits</th>
+          </tr>
+        </thead>
+        <tbody id="month-table-body"></tbody>
+      </table>
+    </div>
+
+  </div>
+  <div class="form-item">
+    <button type="text" name="habit-title" id="habit-title-input" required>
+    <span for="habit-title-input" class="label"></span>Your New Habit</label></button>
+  </div>
+  
+      <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalHabitLabel">Create a Habit</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="form-container">
+            <form id="form">
+     
+
+
+    
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+      <input type="radio" class="btn-check" name="btnradio" id="toDoBtn" autocomplete="off" checked>
+      <label class="btn btn-outline-primary" for="toDoBtn">To-Do</label>
+    
+      <input type="radio" class="btn-check" name="btnradio" id="notToDoBtn" autocomplete="off">
+      <label class="btn btn-outline-primary" for="notToDoBtn">Not-To-Do</label>
+     </div>
+      <div id="weeklyFrequency">
+   
+        <input type="checkbox" class="btn-check" id="monBtn" autocomplete="off">
+        <label class="btn btn-outline-primary" for="monBtn">Mon</label>
+      
+        <input type="checkbox" class="btn-check" id="tueBtn" autocomplete="off">
+        <label class="btn btn-outline-primary" for="tueBtn">Tue</label>
+      
+        <input type="checkbox" class="btn-check" id="wedBtn" autocomplete="off">
+        <label class="btn btn-outline-primary" for="wedBtn">Wed</label>
+
+        <input type="checkbox" class="btn-check" id="thuBtn" autocomplete="off">
+        <label class="btn btn-outline-primary" for="thuBtn">Thu</label>
+        <input type="checkbox" class="btn-check" id="friBtn" autocomplete="off">
+        <label class="btn btn-outline-primary" for="friBtn">Fri</label>
+
+        <input type="checkbox" class="btn-check" id="satBtn" autocomplete="off">
+        <label class="btn btn-outline-primary" for="satBtn">Sat</label>
+        <input type="checkbox" class="btn-check" id="sunBtn" autocomplete="off">
+        <label class="btn btn-outline-primary" for="sunBtn">Sun</label>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary">Add Habit</button>
+  </div>
+</form>
+
+
+
+
+    </form>
+  </div>
+  <!-- End Calendar -->
+</section>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div id="calendar-container">
       <div id="calendar-header">
         <div id="monthDisplay"></div>
         <div>
@@ -131,6 +284,8 @@
       <button id="closeButton">Close</button>
     </div>
 
+    <div id="habit-container"></div> -->
+
     <!-- <div id="modalBackDrop"></div> -->
 
     <!-- <div class="overall-progress-bar">
@@ -161,7 +316,3 @@
        </div>
    </section> -->
 
-
-</section>
-</body>
-</html>
