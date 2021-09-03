@@ -23,7 +23,7 @@
       rel="stylesheet">
 
     <!-- Local CSS Files -->
-    <link rel="stylesheet" href="./css/dashboardstyles.css">
+    <link rel="stylesheet" href="/client/css/dashboardstyles.css">
 
     <script defer src="./js/calendar.js"></script>
 
@@ -36,11 +36,8 @@
     <!-- NAVBAR -->
     <nav id="navbar" class="navbar nav-menu">
       <ul>
-        <li><a href="#index" class="nav-link scrollto"><i class="ri-home-2-fill"></i></i> <span>Home</span></a></li>
-        <li><a href="#" class="nav-link scrollto" ><i class="ri-add-circle-line"></i> <span>Create New Habit</span></a></li>
-        <li><a href="#stats" class="nav-link scrollto"><i class="ri-donut-chart-fill"></i> <span>Streaks and Stats</span></a></li>
-        <li><a href="#settings" class="nav-link scrollto"><i class="ri-settings-3-fill"></i> <span>Settings</span></a></li>
-        <li><a href="" class="nav-link scrollto"><i class="ri-logout-circle-line"></i> <span>Log Out</span></a></li>
+        <li><a href="h1" class="nav-link scrollto"><i class="ri-home-2-fill"></i></i> <span>Home</span></a></li>
+        <li><a href="./index.html" class="nav-link scrollto"><i class="ri-logout-circle-line"></i> <span>Log Out</span></a></li>
       </ul>
     </nav>
     <!-- NAVBAR END -->
@@ -54,8 +51,73 @@
     <div>
       <h1>Welcome to your Dashboard!</h1>
     </div>
+  <!-- End Hero -->
 
-    <div id="calendar-container">
+  <!-- Calendar -->
+<div id="month-name">
+    <div class="view-container">
+
+  <div>
+    <h1 id="view-header"></h1>
+  </div>
+  <div class="view-option selected-view" id="today">Today</div>
+    <!-- <div class="view-option" id="week">Week</div> -->
+    <div class="view-option" id="month">Month</div>
+  </div>
+
+  
+
+    <div id="today-view" class="view">
+      <table class="table">
+        <thead id="today-table-head">
+          <tr id="today-header-row">
+            <th id="today-header-cell" colspan="5"></th>
+          </tr>
+        </thead>
+        <tbody id="today-table-body"></tbody>
+      </table>
+    </div>
+  <div id=month-div>
+    <div id="month-view" class="view hidden">
+      <table class="table">
+        <thead id="month-table-head">
+          <tr id="date-header-row">
+            <th class="habits-header-cell cell">Your Habits</th>
+          </tr>
+        </thead>
+        <tbody id="month-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  </div>
+  
+  <div class="form-container">
+    <form id="form">
+      <div class="form-item">
+        <input type="text" name="habit-title" id="habit-title-input" required>
+        <label for="habit-title-input" class="label">Create New Habit</label>
+      </div>
+
+    </form>
+  </div>
+  <!-- End Calendar -->
+</section>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div id="calendar-container">
       <div id="calendar-header">
         <div id="monthDisplay"></div>
         <div>
@@ -131,6 +193,8 @@
       <button id="closeButton">Close</button>
     </div>
 
+    <div id="habit-container"></div> -->
+
     <!-- <div id="modalBackDrop"></div> -->
 
     <!-- <div class="overall-progress-bar">
@@ -161,7 +225,10 @@
        </div>
    </section> -->
 
+<<<<<<< HEAD
 
 </section>
 </body>
 </html>
+=======
+>>>>>>> b587d009e57b0380e724750f0f4ca9c20908280c
