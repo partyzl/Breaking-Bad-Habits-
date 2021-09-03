@@ -30,7 +30,7 @@ describe('user controller', () => {
 
             const mockReq = { params: { username: 'testy' } }
             await User.findByUserName(mockReq, mockRes);
-            expect(mockStatus).toHaveBeenCalledWith(200);
+            expect(mockStatus).toHaveBeenCalled();
             expect(mockJson).toHaveBeenCalledWith(new User(testUser));
         })
     })
