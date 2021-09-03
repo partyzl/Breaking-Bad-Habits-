@@ -28,13 +28,13 @@ describe('GET /', () => {
     });
 
     // send the token - should respond with a 200
-    test('It responds with JSON', () => {
+    test('It responds with text', () => {
         return request(app)
             .get('/')
             .set('Authorization', `Bearer ${token}`)
             .then((response) => {
                 expect(response.statusCode).toBe(200);
-                expect(response.type).toBe('application/json');
+                expect(response.type).toBe('text/html');
             });
     });
 });

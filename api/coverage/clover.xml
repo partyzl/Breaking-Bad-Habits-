@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1630597667740" clover="3.2.0">
-  <project timestamp="1630597667740" name="All files">
-    <metrics statements="201" coveredstatements="65" conditionals="15" coveredconditionals="0" methods="43" coveredmethods="5" elements="259" coveredelements="70" complexity="0" loc="201" ncloc="201" packages="4" files="8" classes="8"/>
+<coverage generated="1630599626001" clover="3.2.0">
+  <project timestamp="1630599626001" name="All files">
+    <metrics statements="201" coveredstatements="77" conditionals="15" coveredconditionals="1" methods="43" coveredmethods="10" elements="259" coveredelements="88" complexity="0" loc="201" ncloc="201" packages="4" files="8" classes="8"/>
     <package name="api">
-      <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="dbConfig.js" path="/Users/ceriseabelthompson/Documents/Code/projects/Breaking-Bad-Habits-/api/dbConfig.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="9" count="3" type="stmt"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="3" count="5" type="stmt"/>
+        <line num="9" count="5" type="stmt"/>
       </file>
       <file name="server.js" path="/Users/ceriseabelthompson/Documents/Code/projects/Breaking-Bad-Habits-/api/server.js">
-        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -117,16 +117,16 @@
       </file>
     </package>
     <package name="api.Models">
-      <metrics statements="96" coveredstatements="20" conditionals="5" coveredconditionals="0" methods="30" coveredmethods="5"/>
+      <metrics statements="96" coveredstatements="29" conditionals="5" coveredconditionals="0" methods="30" coveredmethods="8"/>
       <file name="habit.js" path="/Users/ceriseabelthompson/Documents/Code/projects/Breaking-Bad-Habits-/api/Models/habit.js">
-        <metrics statements="72" coveredstatements="4" conditionals="5" coveredconditionals="0" methods="22" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
+        <metrics statements="72" coveredstatements="13" conditionals="5" coveredconditionals="0" methods="22" coveredmethods="3"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
@@ -139,11 +139,11 @@
         <line num="37" count="0" type="stmt"/>
         <line num="38" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
         <line num="57" count="0" type="stmt"/>
         <line num="64" count="0" type="stmt"/>
         <line num="65" count="0" type="stmt"/>
@@ -191,12 +191,12 @@
         <line num="174" count="0" type="stmt"/>
         <line num="176" count="0" type="stmt"/>
         <line num="178" count="0" type="stmt"/>
-        <line num="184" count="2" type="stmt"/>
+        <line num="184" count="4" type="stmt"/>
       </file>
       <file name="user.js" path="/Users/ceriseabelthompson/Documents/Code/projects/Breaking-Bad-Habits-/api/Models/user.js">
         <metrics statements="24" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="5"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="2" count="3" type="stmt"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
         <line num="6" count="3" type="stmt"/>
         <line num="7" count="3" type="stmt"/>
         <line num="8" count="3" type="stmt"/>
@@ -218,24 +218,24 @@
         <line num="43" count="1" type="stmt"/>
         <line num="44" count="1" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
-        <line num="52" count="3" type="stmt"/>
+        <line num="52" count="4" type="stmt"/>
       </file>
     </package>
     <package name="api.middleware">
-      <metrics statements="12" coveredstatements="3" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="12" coveredstatements="6" conditionals="4" coveredconditionals="1" methods="2" coveredmethods="1"/>
       <file name="auth.js" path="/Users/ceriseabelthompson/Documents/Code/projects/Breaking-Bad-Habits-/api/middleware/auth.js">
-        <metrics statements="12" coveredstatements="3" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <metrics statements="12" coveredstatements="6" conditionals="4" coveredconditionals="1" methods="2" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="5" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
         <line num="9" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="10" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
         <line num="22" count="2" type="stmt"/>
       </file>
     </package>
